@@ -1,28 +1,29 @@
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Container from '../components/Container';
+import { HiOutlineUserPlus, HiOutlineClipboardDocumentList, HiOutlineCheckBadge, HiOutlineBanknotes } from 'react-icons/hi2';
 
 const HowItWorks = () => {
     const steps = [
         {
             title: "Register Your Account",
             desc: "Join as a Worker or a Buyer. Workers get 10 coins, and Buyers get 50 coins instantly.",
-            icon: "👤"
+            icon: <HiOutlineUserPlus className="w-10 h-10" />
         },
         {
             title: "Complete/Post Tasks",
             desc: "Workers browse tasks and submit proof. Buyers post tasks and set requirements.",
-            icon: "📋"
+            icon: <HiOutlineClipboardDocumentList className="w-10 h-10" />
         },
         {
             title: "Earn/Get Results",
             desc: "Buyers review and approve. Workers get paid in coins instantly for every approved task.",
-            icon: "💰"
+            icon: <HiOutlineCheckBadge className="w-10 h-10" />
         },
         {
             title: "Withdraw Earnings",
             desc: "Convert your earned coins into real rewards once you reach the threshold.",
-            icon: "💸"
+            icon: <HiOutlineBanknotes className="w-10 h-10" />
         }
     ];
 
@@ -48,7 +49,7 @@ const HowItWorks = () => {
                             viewport={{ once: true }}
                             className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-indigo-50/20 text-center group hover:bg-indigo-600 transition-all duration-500"
                         >
-                            <div className="text-5xl mb-6 group-hover:scale-110 transition-transform duration-500">{step.icon}</div>
+                            <div className="mb-6 flex justify-center text-[#7C3AED] group-hover:text-white transition-colors duration-500">{step.icon}</div>
                             <h3 className="text-2xl font-bold text-gray-900 group-hover:text-white mb-4">{step.title}</h3>
                             <p className="text-gray-500 group-hover:text-indigo-100 leading-relaxed font-medium">{step.desc}</p>
                         </motion.div>

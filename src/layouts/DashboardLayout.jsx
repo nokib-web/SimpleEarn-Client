@@ -5,6 +5,20 @@ import { useState, useEffect } from 'react';
 import api from '../utils/api';
 import Logo from '../components/Logo';
 import { motion, AnimatePresence } from 'framer-motion';
+import {
+  HiOutlineHome,
+  HiOutlineClipboardDocumentList,
+  HiOutlineDocumentText,
+  HiOutlineBanknotes,
+  HiOutlinePlusCircle,
+  HiOutlineQueueList,
+  HiOutlineClipboardDocumentCheck,
+  HiOutlineCreditCard,
+  HiOutlineChartBar,
+  HiOutlineUsers,
+  HiOutlinePencilSquare,
+  HiOutlineCurrencyDollar
+} from 'react-icons/hi2';
 
 const DashboardLayout = () => {
   const { userData, logout } = useAuth();
@@ -16,26 +30,26 @@ const DashboardLayout = () => {
   const [notificationCount, setNotificationCount] = useState(0);
 
   const workerRoutes = [
-    { path: '/dashboard/worker-home', label: 'Home', icon: '🏠' },
-    { path: '/dashboard/task-list', label: 'Task List', icon: '📋' },
-    { path: '/dashboard/my-submissions', label: 'My Submissions', icon: '📝' },
-    { path: '/dashboard/withdrawals', label: 'Withdrawals', icon: '💰' }
+    { path: '/dashboard/worker-home', label: 'Home', icon: <HiOutlineHome /> },
+    { path: '/dashboard/task-list', label: 'Task List', icon: <HiOutlineClipboardDocumentList /> },
+    { path: '/dashboard/my-submissions', label: 'My Submissions', icon: <HiOutlineDocumentText /> },
+    { path: '/dashboard/withdrawals', label: 'Withdrawals', icon: <HiOutlineBanknotes /> }
   ];
 
   const buyerRoutes = [
-    { path: '/dashboard/buyer-home', label: 'Home', icon: '🏠' },
-    { path: '/dashboard/add-task', label: 'Add new Tasks', icon: '➕' },
-    { path: '/dashboard/my-tasks', label: "My Task's", icon: '📋' },
-    { path: '/dashboard/task-review', label: 'Task To Review', icon: '✅' },
-    { path: '/dashboard/purchase-coin', label: 'Purchase Coin', icon: '💳' },
-    { path: '/dashboard/payment-history', label: 'Payment history', icon: '📊' }
+    { path: '/dashboard/buyer-home', label: 'Home', icon: <HiOutlineHome /> },
+    { path: '/dashboard/add-task', label: 'Add new Tasks', icon: <HiOutlinePlusCircle /> },
+    { path: '/dashboard/my-tasks', label: "My Task's", icon: <HiOutlineQueueList /> },
+    { path: '/dashboard/task-review', label: 'Task To Review', icon: <HiOutlineClipboardDocumentCheck /> },
+    { path: '/dashboard/purchase-coin', label: 'Purchase Coin', icon: <HiOutlineCreditCard /> },
+    { path: '/dashboard/payment-history', label: 'Payment history', icon: <HiOutlineChartBar /> }
   ];
 
   const adminRoutes = [
-    { path: '/dashboard/admin-home', label: 'Home', icon: '🏠' },
-    { path: '/dashboard/manage-users', label: 'Manage Users', icon: '👥' },
-    { path: '/dashboard/manage-tasks', label: 'Manage Tasks', icon: '📋' },
-    { path: '/dashboard/withdraw-requests', label: 'Withdraw Request', icon: '💸' }
+    { path: '/dashboard/admin-home', label: 'Home', icon: <HiOutlineHome /> },
+    { path: '/dashboard/manage-users', label: 'Manage Users', icon: <HiOutlineUsers /> },
+    { path: '/dashboard/manage-tasks', label: 'Manage Tasks', icon: <HiOutlinePencilSquare /> },
+    { path: '/dashboard/withdraw-requests', label: 'Withdraw Request', icon: <HiOutlineCurrencyDollar /> }
   ];
 
   const getRoutes = () => {
@@ -91,7 +105,7 @@ const DashboardLayout = () => {
   return (
     <div className="min-h-screen bg-[#FDFDFF] flex flex-col font-sans">
       {/* Header */}
-      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <header className="sticky top-0 z-[1000] bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
@@ -209,12 +223,12 @@ const DashboardLayout = () => {
       <div className="flex-grow flex flex-col md:flex-row max-w-7xl mx-auto w-full px-4 gap-8 py-8 md:py-12">
         {/* Sidebar */}
         <aside className={`
-            fixed inset-0 z-[60] md:relative md:z-10 md:block 
+            fixed inset-0 z-[100000] md:relative md:z-10 md:block 
             w-full md:w-64 transform transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1)
             ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
         `}>
           {/* Mobile Overlay */}
-          <div className={`fixed inset-0 bg-[#0F172A]/40 backdrop-blur-md md:hidden ${sidebarOpen ? 'block' : 'hidden'}`} onClick={() => setSidebarOpen(false)}></div>
+          <div className={`fixed inset-0 bg-[#0F172A]/70 backdrop-blur-2xl md:hidden ${sidebarOpen ? 'block' : 'hidden'}`} onClick={() => setSidebarOpen(false)}></div>
 
           <nav className="relative h-full bg-white md:bg-transparent rounded-[3rem] p-8 md:p-0 border border-gray-100 md:border-none shadow-3xl md:shadow-none overflow-y-auto">
             <div className="mb-10 md:hidden flex justify-between items-center">
@@ -240,7 +254,7 @@ const DashboardLayout = () => {
                         }
                       `}
                     >
-                      <span className={`text-2xl transition-all duration-500 group-hover:scale-110 ${isActive ? 'grayscale-0' : 'grayscale-100 opacity-50 group-hover:grayscale-0 group-hover:opacity-100'}`}>{route.icon}</span>
+                      <span className={`text-2xl transition-all duration-500 group-hover:scale-110 ${isActive ? 'text-white' : 'text-[#7C3AED] opacity-50 group-hover:opacity-100'}`}>{route.icon}</span>
                       <span className="tracking-tight">{route.label}</span>
                       {isActive && <motion.div layoutId="nav-pill" className="ml-auto w-2 h-2 bg-white rounded-full shadow-lg" />}
                     </Link>
