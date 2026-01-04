@@ -27,6 +27,7 @@ import WithdrawRequests from './pages/dashboard/WithdrawRequests';
 import ManageUsers from './pages/dashboard/ManageUsers';
 import ManageTasks from './pages/dashboard/ManageTasks';
 import ManageBlogs from './pages/dashboard/ManageBlogs';
+import Notifications from './pages/dashboard/Notifications';
 
 import { ThemeProvider } from './contexts/ThemeContext';
 
@@ -71,6 +72,7 @@ function App() {
                             <Route path="manage-users" element={<PrivateRoute allowedRoles={['admin']}><ManageUsers /></PrivateRoute>} />
                             <Route path="manage-tasks" element={<PrivateRoute allowedRoles={['admin']}><ManageTasks /></PrivateRoute>} />
                             <Route path="manage-blogs" element={<PrivateRoute allowedRoles={['admin']}><ManageBlogs /></PrivateRoute>} />
+                            <Route path="notifications" element={<Notifications />} />
                         </Route>
                     </Routes>
                 </Router>

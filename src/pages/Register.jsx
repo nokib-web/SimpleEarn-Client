@@ -9,7 +9,7 @@ import { HiOutlineUser, HiOutlineEnvelope, HiOutlineLockClosed, HiOutlinePhoto, 
 
 const Register = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const { registerUser } = useAuth();
+  const { register: registerAction } = useAuth(); // Alias to avoid conflict with react-hook-form's register
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
@@ -24,7 +24,7 @@ const Register = () => {
         photoURL = await uploadImageToImgBB(data.photo[0]);
       }
 
-      await registerUser(data.email, data.password, data.name, photoURL, data.role);
+      await registerAction(data.email, data.password, data.name, photoURL, data.role);
       navigate('/dashboard');
     } catch (err) {
       console.error(err);

@@ -41,7 +41,7 @@ const AdminHome = () => {
     >
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-10">
         <div>
-          <h1 className="text-3xl font-black text-[#0F172A] tracking-tighter">Admin Dashboard</h1>
+          <h1 className="text-2xl md:text-3xl font-black text-[#0F172A] tracking-tighter">Admin Dashboard</h1>
           <p className="text-[#64748B] text-sm font-medium mt-1">Global protocol oversight and asset distribution control.</p>
         </div>
         <div className="flex items-center gap-3 px-4 py-2 bg-[#F97316]/5 border border-[#F97316]/10 rounded-2xl">
@@ -51,7 +51,7 @@ const AdminHome = () => {
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         {[
           { label: 'Total Workers', value: stats.totalWorkers, icon: HiOutlineUsers, color: 'text-[#7C3AED]', bg: 'bg-[#7C3AED]/5' },
           { label: 'Total Buyers', value: stats.totalBuyers, icon: HiOutlineUserGroup, color: 'text-[#14B8A6]', bg: 'bg-[#14B8A6]/5' },

@@ -19,7 +19,8 @@ import {
   HiOutlineUsers,
   HiOutlinePencilSquare,
   HiOutlineCurrencyDollar,
-  HiOutlineNewspaper
+  HiOutlineNewspaper,
+  HiOutlineArrowRightOnRectangle
 } from 'react-icons/hi2';
 
 const DashboardLayout = () => {
@@ -123,15 +124,18 @@ const DashboardLayout = () => {
           </div>
 
           <div className="flex items-center gap-3 md:gap-6">
-            <ThemeToggle />
-            <div className="hidden sm:flex items-center bg-[#F8FAFC] dark:bg-[#1E293B] border border-[#7C3AED]/10 dark:border-[#7C3AED]/20 rounded-2xl px-4 py-2">
+            <div className="hidden md:flex items-center bg-[#F8FAFC] dark:bg-[#1E293B] border border-[#7C3AED]/10 dark:border-[#7C3AED]/20 rounded-2xl px-4 py-2">
               <span className="w-2h-2 bg-[#7C3AED] rounded-full animate-pulse mr-2 hidden lg:block"></span>
               <span className="text-[#64748B] dark:text-[#94A3B8] text-sm font-bold mr-2">Wallet:</span>
               <span className="text-[#7C3AED] font-extrabold">{userData.coin.toLocaleString()}</span>
               <span className="text-[#14B8A6] text-xs font-bold ml-1 uppercase border-l border-gray-100 dark:border-gray-700 pl-2">Coins</span>
             </div>
 
-            <div className="relative">
+            <div className="hidden md:block">
+              <ThemeToggle />
+            </div>
+
+            <div className="relative hidden md:block">
               <button
                 onClick={() => setShowNotifications(!showNotifications)}
                 className="relative p-3 bg-white dark:bg-[#1E293B] border border-gray-100 dark:border-gray-800 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 hover:shadow-md transition-all group"
@@ -211,9 +215,10 @@ const DashboardLayout = () => {
               </div>
             </div>
 
+            {/* Logout Button - Desktop Only */}
             <button
               onClick={handleLogout}
-              className="p-3 text-[#64748B] dark:text-[#94A3B8] hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-2xl transition-all"
+              className="hidden md:block p-3 text-[#64748B] dark:text-[#94A3B8] hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-2xl transition-all"
               title="Logout"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -267,6 +272,32 @@ const DashboardLayout = () => {
               })}
             </ul>
 
+            {/* Mobile Only Controls */}
+            <div className="mt-8 pt-8 border-t border-gray-100 dark:border-gray-800 space-y-4 md:hidden">
+              <div className="flex items-center justify-between px-6 py-2 bg-[#F8FAFC] dark:bg-white/5 rounded-2xl">
+                <span className="text-xs font-black uppercase tracking-widest text-[#64748B] dark:text-[#94A3B8]">Theme</span>
+                <ThemeToggle />
+              </div>
+              <div className="flex items-center justify-between px-6 py-2 bg-[#F8FAFC] dark:bg-white/5 rounded-2xl">
+                <span className="text-xs font-black uppercase tracking-widest text-[#64748B] dark:text-[#94A3B8]">Alerts</span>
+                <div className="relative">
+                  <button onClick={() => navigate('/dashboard/notifications')} className="relative p-2 bg-white dark:bg-[#1E293B] rounded-xl shadow-sm text-[#64748B] dark:text-[#94A3B8]">
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                    </svg>
+                    {notificationCount > 0 && <span className="absolute top-1 right-1 w-2 h-2 bg-[#F97316] rounded-full animate-bounce"></span>}
+                  </button>
+                </div>
+              </div>
+              <button
+                onClick={handleLogout}
+                className="w-full flex items-center gap-5 px-6 py-4 rounded-[2rem] font-black text-sm text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 transition-all group"
+              >
+                <span className="text-2xl group-hover:scale-110 transition-transform"><HiOutlineArrowRightOnRectangle /></span>
+                <span className="tracking-tight">Sign Out</span>
+              </button>
+            </div>
+
             <div className="mt-16 pt-16 border-t border-gray-100 dark:border-gray-800 hidden md:block">
               <div className="bg-gradient-to-br from-[#7C3AED] via-[#6D28D9] to-[#4338CA] rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl shadow-purple-100 group">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700"></div>
@@ -281,7 +312,7 @@ const DashboardLayout = () => {
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 bg-white dark:bg-[#1E293B] rounded-[4rem] p-8 lg:p-16 border border-gray-100 dark:border-gray-800 shadow-sm min-h-[75vh] relative overflow-hidden">
+        <main className="flex-1 bg-white dark:bg-[#1E293B] rounded-[2.5rem] md:rounded-[4rem] p-6 lg:p-16 border border-gray-100 dark:border-gray-800 shadow-sm min-h-[75vh] relative overflow-hidden">
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#F8FAFC] dark:bg-[#334155]/20 rounded-full blur-[100px] -mr-32 -mt-32"></div>
           <AnimatePresence mode="wait">
             <motion.div
