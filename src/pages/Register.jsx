@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { uploadImageToImgBB } from '../utils/imgbb';
+import api from '../utils/api';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +17,7 @@ const Register = () => {
   const [loading, setLoading] = useState(false);
   const [imageFile, setImageFile] = useState(null);
   const [uploadingImage, setUploadingImage] = useState(false);
-  const { register } = useAuth();
+  const { register, login } = useAuth();
   const navigate = useNavigate();
 
   const validateForm = () => {
@@ -60,7 +62,7 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
+
     if (!validateForm()) {
       return;
     }
@@ -74,10 +76,14 @@ const Register = () => {
       try {
         photoURL = await uploadImageToImgBB(imageFile);
       } catch (error) {
-        setErrors({ general: 'Failed to upload image. Please try again or use a URL.' });
-        setLoading(false);
+        console.error('Image upload error:', error);
+        // Don't block registration if image upload fails - user can use URL or skip
+        setErrors({ general: 'Failed to upload image. You can continue without image or use a URL.' });
         setUploadingImage(false);
-        return;
+        // Continue with registration using URL if provided, or empty photoURL
+        if (!formData.photoURL) {
+          photoURL = '';
+        }
       }
       setUploadingImage(false);
     }
@@ -93,7 +99,38 @@ const Register = () => {
       navigate('/dashboard');
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
-        setErrors({ email: 'Email already in use' });
+        // Try to recover: Login -> Check DB -> Register in DB if missing
+        try {
+          await login(formData.email, formData.password);
+          // Login successful, checks in AuthContext should handle the rest
+          // But if AuthContext's onAuthStateChanged fails silently or signs out, we might need manual check
+          // However, useAuth login function calls /auth/me. 
+          // If /auth/me fails (404), we should catch it here? 
+          // The login function in AuthContext re-throws errors.
+          navigate('/dashboard');
+        } catch (loginError) {
+          // If login failed because user not in DB (404 from /auth/me)
+          if (loginError.response && loginError.response.status === 404) {
+            try {
+              // Retry backend registration
+              await api.post('/auth/register', {
+                name: formData.name,
+                email: formData.email,
+                photoURL: photoURL,
+                role: formData.role
+              });
+              // Fetch user again to sync context
+              await login(formData.email, formData.password);
+              navigate('/dashboard');
+            } catch (regError) {
+              setErrors({ general: 'Account exists but failed to sync. Please contact support.' });
+            }
+          } else if (loginError.code === 'auth/wrong-password') {
+            setErrors({ email: 'Email already exists. Please login.' });
+          } else {
+            setErrors({ email: 'Email already exists. ' + loginError.message });
+          }
+        }
       } else {
         setErrors({ general: error.message || 'Registration failed' });
       }
@@ -127,7 +164,7 @@ const Register = () => {
               {errors.general}
             </div>
           )}
-          
+
           <div className="space-y-4">
             <div>
               <label htmlFor="name" className="block text-sm font-medium text-gray-700">

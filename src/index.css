@@ -1,12 +1,99 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary: #7C3AED;
+  /* Deep Purple */
+  --secondary: #14B8A6;
+  /* Teal */
+  --accent: #F97316;
+  /* Coral */
+  --dark: #0F172A;
+  /* Charcoal */
+  --soft-white: #F9FAFB;
+  /* Soft White */
+}
+
 body {
-    margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-        'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-        sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  font-family: 'Outfit', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--soft-white);
+  color: var(--dark);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--soft-white);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary);
+}
+
+/* Global Animations */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-float {
+  animation: float 4s ease-in-out infinite;
+}
+
+@keyframes pulse-soft {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 3s ease-in-out infinite;
+}
+
+/* Premium Tailwind Utilities */
+@layer components {
+  .btn-primary {
+    @apply px-8 py-4 bg-[#7C3AED] text-white rounded-2xl font-black transition-all hover:bg-[#6D28D9] hover:shadow-xl hover:shadow-purple-200 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-8 py-4 bg-[#14B8A6] text-white rounded-2xl font-black transition-all hover:bg-[#0D9488] hover:shadow-xl hover:shadow-teal-100 active:scale-95;
+  }
+
+  .btn-accent {
+    @apply px-8 py-4 bg-[#F97316] text-white rounded-2xl font-black transition-all hover:bg-[#EA580C] hover:shadow-xl hover:shadow-orange-100 active:scale-95;
+  }
+
+  .glass-card {
+    @apply bg-white/80 backdrop-blur-md border border-white/20 shadow-xl;
+  }
 }

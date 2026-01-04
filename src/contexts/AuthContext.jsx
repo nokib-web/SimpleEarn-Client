@@ -1,8 +1,8 @@
 import { createContext, useContext, useState, useEffect } from 'react';
-import { 
-  createUserWithEmailAndPassword, 
-  signInWithEmailAndPassword, 
-  signInWithPopup, 
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
   signOut,
   onAuthStateChanged
 } from 'firebase/auth';
@@ -29,16 +29,20 @@ export const AuthProvider = ({ children }) => {
       if (firebaseUser) {
         const token = await firebaseUser.getIdToken();
         localStorage.setItem('token', token);
-        
+
         try {
           const response = await api.get('/auth/me');
           setUserData(response.data.user);
           setUser(firebaseUser);
         } catch (error) {
-          console.error('Error fetching user data:', error);
-          // If user doesn't exist in DB, sign them out
+          console.error('Error fetching user data in onAuthStateChanged:', error);
+          // If we're not in the middle of login/register, and user is 404, then sign out
+          // For now, let's just log it and let the specific login/register functions handle state
           if (error.response?.status === 404) {
-            await signOut(auth);
+            console.warn('User not found in DB, waiting for registration if applicable');
+          } else {
+            setUser(null);
+            setUserData(null);
             localStorage.removeItem('token');
           }
         }
@@ -103,13 +107,13 @@ export const AuthProvider = ({ children }) => {
       const token = await result.user.getIdToken();
       localStorage.setItem('token', token);
 
-      // Check if user exists, if not create one
+      let currentData = null;
       try {
         const response = await api.get('/auth/me');
-        setUserData(response.data.user);
+        currentData = response.data.user;
       } catch (error) {
-        // User doesn't exist, register them as worker by default
         if (error.response?.status === 404) {
+          // New user, register as worker
           await api.post('/auth/register', {
             name: result.user.displayName,
             email: result.user.email,
@@ -117,14 +121,28 @@ export const AuthProvider = ({ children }) => {
             role: 'worker'
           });
           const response = await api.get('/auth/me');
-          setUserData(response.data.user);
+          currentData = response.data.user;
+        } else {
+          throw error;
         }
       }
 
+      setUserData(currentData);
       setUser(result.user);
       return { success: true };
     } catch (error) {
       console.error('Google login error:', error);
+      throw error;
+    }
+  };
+
+  const refetchUserData = async () => {
+    try {
+      const response = await api.get('/auth/me');
+      setUserData(response.data.user);
+      return response.data.user;
+    } catch (error) {
+      console.error('Error refetching user data:', error);
       throw error;
     }
   };
@@ -148,7 +166,8 @@ export const AuthProvider = ({ children }) => {
     register,
     login,
     loginWithGoogle,
-    logout
+    logout,
+    refetchUserData
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

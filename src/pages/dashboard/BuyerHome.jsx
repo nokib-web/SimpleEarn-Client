@@ -12,15 +12,15 @@ const BuyerHome = () => {
   useEffect(() => {
     const fetchStats = async () => {
       try {
-        const tasksRes = await api.get('/tasks/buyer/my-tasks');
+        const [tasksRes, statsRes] = await Promise.all([
+          api.get('/tasks/buyer/my-tasks'),
+          api.get('/submissions/buyer/stats').catch(() => ({ data: { totalPayment: 0 } }))
+        ]);
         const tasks = tasksRes.data;
 
         const totalTasks = tasks.length;
         const pendingTasks = tasks.reduce((sum, task) => sum + task.required_workers, 0);
-        const totalPayment = tasks.reduce((sum, task) => {
-          const completedWorkers = (task.required_workers - (task.required_workers || 0));
-          return sum + (task.payable_amount * (task.required_workers - completedWorkers));
-        }, 0);
+        const totalPayment = statsRes.data.totalPayment || 0;
 
         setStats({
           totalTasks,

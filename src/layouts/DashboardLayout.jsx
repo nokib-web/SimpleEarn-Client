@@ -1,6 +1,10 @@
 import { Outlet, Link, useLocation, useNavigate } from 'react-router-dom';
+import Footer from '../components/Footer';
 import { useAuth } from '../contexts/AuthContext';
 import { useState, useEffect } from 'react';
+import api from '../utils/api';
+import Logo from '../components/Logo';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const DashboardLayout = () => {
   const { userData, logout } = useAuth();
@@ -51,7 +55,6 @@ const DashboardLayout = () => {
   };
 
   useEffect(() => {
-    // Redirect to appropriate home based on role
     if (location.pathname === '/dashboard') {
       if (userData?.role === 'worker') navigate('/dashboard/worker-home');
       else if (userData?.role === 'buyer') navigate('/dashboard/buyer-home');
@@ -73,148 +76,212 @@ const DashboardLayout = () => {
     };
 
     fetchNotifications();
-    // Refresh notifications every 30 seconds
     const interval = setInterval(fetchNotifications, 30000);
     return () => clearInterval(interval);
   }, [userData]);
 
   if (!userData) {
-    return <div>Loading...</div>;
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-[#FDFDFF]">
+        <div className="w-12 h-12 border-4 border-purple-100 border-t-[#7C3AED] rounded-full animate-spin"></div>
+      </div>
+    );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#FDFDFF] flex flex-col font-sans">
       {/* Header */}
-      <header className="bg-white shadow-md">
-        <div className="flex items-center justify-between px-4 py-3">
-          <div className="flex items-center space-x-4">
-            <Link to="/" className="text-2xl font-bold text-indigo-600">SimpleEarn</Link>
+      <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+        <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <button
+              onClick={() => setSidebarOpen(!sidebarOpen)}
+              className="p-2 mr-2 rounded-xl hover:bg-gray-100 text-[#64748B] transition-colors md:hidden"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+            <Logo />
           </div>
-          
-          <div className="flex items-center space-x-4">
-            <div className="text-gray-700">
-              Coins: <span className="font-bold text-indigo-600">{userData.coin}</span>
+
+          <div className="flex items-center gap-3 md:gap-6">
+            <div className="hidden sm:flex items-center bg-[#F8FAFC] border border-[#7C3AED]/10 rounded-2xl px-4 py-2">
+              <span className="w-2h-2 bg-[#7C3AED] rounded-full animate-pulse mr-2 hidden lg:block"></span>
+              <span className="text-[#64748B] text-sm font-bold mr-2">Wallet:</span>
+              <span className="text-[#7C3AED] font-extrabold">{userData.coin.toLocaleString()}</span>
+              <span className="text-[#14B8A6] text-xs font-bold ml-1 uppercase border-l border-gray-100 pl-2">Coins</span>
             </div>
-            
+
             <div className="relative">
               <button
                 onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-2 text-gray-700 hover:text-indigo-600"
+                className="relative p-3 bg-white border border-gray-100 rounded-2xl hover:bg-gray-50 hover:shadow-md transition-all group"
               >
-                🔔
+                <svg className="w-6 h-6 text-[#64748B] group-hover:text-[#7C3AED] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
+                </svg>
                 {notificationCount > 0 && (
-                  <span className="absolute top-0 right-0 w-5 h-5 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
-                    {notificationCount}
-                  </span>
+                  <span className="absolute top-2.5 right-2.5 w-2.5 h-2.5 bg-[#F97316] border-2 border-white rounded-full animate-bounce"></span>
                 )}
               </button>
-              {showNotifications && (
-                <div className="absolute right-0 mt-2 w-80 bg-white rounded-md shadow-lg z-50 max-h-96 overflow-y-auto">
-                  <div className="p-4 border-b">
-                    <h3 className="font-semibold">Notifications</h3>
-                  </div>
-                  {notifications.length === 0 ? (
-                    <div className="p-4 text-sm text-gray-500">No notifications</div>
-                  ) : (
-                    <div className="divide-y">
-                      {notifications.map((notification) => (
-                        <div
-                          key={notification._id}
-                          className={`p-4 hover:bg-gray-50 cursor-pointer ${!notification.isRead ? 'bg-blue-50' : ''}`}
-                          onClick={() => {
-                            if (!notification.isRead) {
-                              api.patch(`/notifications/${notification._id}/read`);
-                              setNotifications(notifications.map(n => 
-                                n._id === notification._id ? { ...n, isRead: true } : n
-                              ));
-                              setNotificationCount(prev => Math.max(0, prev - 1));
-                            }
-                            navigate(notification.actionRoute);
-                            setShowNotifications(false);
-                          }}
-                        >
-                          <p className="text-sm">{notification.message}</p>
-                          <p className="text-xs text-gray-500 mt-1">
-                            {new Date(notification.time).toLocaleString()}
-                          </p>
-                        </div>
-                      ))}
+
+              <AnimatePresence>
+                {showNotifications && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                    className="absolute right-0 mt-4 w-96 bg-white rounded-3xl shadow-2xl shadow-purple-100 border border-gray-100 overflow-hidden z-50 ring-1 ring-black/5"
+                  >
+                    <div className="p-6 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between">
+                      <h3 className="font-black text-[#0F172A] text-sm uppercase tracking-widest">Protocol Alerts</h3>
+                      <span className="px-2.5 py-1 bg-[#7C3AED]/10 text-[#7C3AED] text-[10px] font-black rounded-lg uppercase tracking-wider">{notificationCount} New</span>
                     </div>
-                  )}
-                </div>
-              )}
+                    <div className="max-h-[400px] overflow-y-auto overflow-x-hidden p-2">
+                      {notifications.length === 0 ? (
+                        <div className="p-12 text-center text-gray-400 font-medium">No system updates.</div>
+                      ) : (
+                        <div className="space-y-1">
+                          {notifications.map((notification) => (
+                            <div
+                              key={notification._id}
+                              className={`p-4 rounded-2xl hover:bg-[#F8FAFC] transition-colors cursor-pointer relative group ${!notification.isRead ? 'bg-[#7C3AED]/5' : ''}`}
+                              onClick={() => {
+                                if (!notification.isRead) {
+                                  api.patch(`/notifications/${notification._id}/read`);
+                                  setNotifications(notifications.map(n =>
+                                    n._id === notification._id ? { ...n, isRead: true } : n
+                                  ));
+                                  setNotificationCount(prev => Math.max(0, prev - 1));
+                                }
+                                navigate(notification.actionRoute);
+                                setShowNotifications(false);
+                              }}
+                            >
+                              <div className="flex gap-4">
+                                <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${!notification.isRead ? 'bg-[#7C3AED]' : 'bg-transparent'}`}></div>
+                                <div>
+                                  <p className="text-sm font-bold text-[#475569] leading-snug group-hover:text-[#7C3AED] transition-colors">{notification.message}</p>
+                                  <p className="text-[10px] text-[#94A3B8] font-black uppercase tracking-wider mt-2 flex items-center gap-2">
+                                    <span className="w-1 h-1 bg-gray-200 rounded-full"></span>
+                                    {new Date(notification.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                                  </p>
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
-            <div className="flex items-center space-x-2">
+            <div className="h-10 w-[1px] bg-gray-100 mx-2 hidden md:block"></div>
+
+            <div className="flex items-center gap-3 bg-[#F8FAFC] p-1.5 pr-4 rounded-2xl border border-[#7C3AED]/5">
               <img
                 src={userData.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name)}`}
                 alt={userData.name}
-                className="w-8 h-8 rounded-full"
+                className="w-10 h-10 rounded-xl object-cover shadow-sm ring-2 ring-white"
               />
-              <div className="hidden md:block">
-                <div className="text-sm font-medium">{userData.name}</div>
-                <div className="text-xs text-gray-500 capitalize">{userData.role}</div>
+              <div className="hidden lg:block text-left">
+                <div className="text-sm font-black text-[#0F172A] leading-none mb-1">{userData.name.split(' ')[0]}</div>
+                <div className="text-[10px] text-[#7C3AED] font-black uppercase tracking-widest">{userData.role}</div>
               </div>
             </div>
 
             <button
               onClick={handleLogout}
-              className="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 text-sm"
+              className="p-3 text-[#64748B] hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all"
+              title="Logout"
             >
-              Logout
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
+              </svg>
             </button>
           </div>
         </div>
       </header>
 
-      <div className="flex">
+      <div className="flex-grow flex flex-col md:flex-row max-w-7xl mx-auto w-full px-4 gap-8 py-8 md:py-12">
         {/* Sidebar */}
-        <aside className={`bg-white shadow-md w-64 min-h-screen transition-all ${sidebarOpen ? 'block' : 'hidden md:block'}`}>
-          <nav className="p-4">
-            <ul className="space-y-2">
-              {getRoutes().map((route) => (
-                <li key={route.path}>
-                  <Link
-                    to={route.path}
-                    className={`flex items-center space-x-2 px-4 py-2 rounded-md ${
-                      location.pathname === route.path
-                        ? 'bg-indigo-600 text-white'
-                        : 'text-gray-700 hover:bg-gray-100'
-                    }`}
-                  >
-                    <span>{route.icon}</span>
-                    <span>{route.label}</span>
-                  </Link>
-                </li>
-              ))}
+        <aside className={`
+            fixed inset-0 z-[60] md:relative md:z-10 md:block 
+            w-full md:w-64 transform transition-transform duration-500 cubic-bezier(0.4, 0, 0.2, 1)
+            ${sidebarOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
+        `}>
+          {/* Mobile Overlay */}
+          <div className={`fixed inset-0 bg-[#0F172A]/40 backdrop-blur-md md:hidden ${sidebarOpen ? 'block' : 'hidden'}`} onClick={() => setSidebarOpen(false)}></div>
+
+          <nav className="relative h-full bg-white md:bg-transparent rounded-[3rem] p-8 md:p-0 border border-gray-100 md:border-none shadow-3xl md:shadow-none overflow-y-auto">
+            <div className="mb-10 md:hidden flex justify-between items-center">
+              <Logo />
+              <button onClick={() => setSidebarOpen(false)} className="p-3 bg-[#F8FAFC] rounded-2xl text-[#64748B] hover:text-[#7C3AED] transition-colors">✕</button>
+            </div>
+
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#94A3B8] mb-8 px-5">Protocol Terminal</p>
+
+            <ul className="space-y-3">
+              {getRoutes().map((route) => {
+                const isActive = location.pathname === route.path;
+                return (
+                  <li key={route.path}>
+                    <Link
+                      to={route.path}
+                      onClick={() => setSidebarOpen(false)}
+                      className={`
+                        flex items-center gap-5 px-6 py-5 rounded-[2rem] font-black text-sm transition-all group relative
+                        ${isActive
+                          ? 'bg-[#7C3AED] text-white shadow-2xl shadow-purple-200'
+                          : 'text-[#64748B] hover:bg-white hover:text-[#7C3AED] border border-transparent hover:border-[#7C3AED]/10'
+                        }
+                      `}
+                    >
+                      <span className={`text-2xl transition-all duration-500 group-hover:scale-110 ${isActive ? 'grayscale-0' : 'grayscale-100 opacity-50 group-hover:grayscale-0 group-hover:opacity-100'}`}>{route.icon}</span>
+                      <span className="tracking-tight">{route.label}</span>
+                      {isActive && <motion.div layoutId="nav-pill" className="ml-auto w-2 h-2 bg-white rounded-full shadow-lg" />}
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
+
+            <div className="mt-16 pt-16 border-t border-gray-100 hidden md:block">
+              <div className="bg-gradient-to-br from-[#7C3AED] via-[#6D28D9] to-[#4338CA] rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl shadow-purple-100 group">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700"></div>
+                <div className="relative z-10 text-center">
+                  <span className="text-[10px] font-black text-purple-200 uppercase tracking-widest mb-3 block">Protocol Upgrade</span>
+                  <h4 className="text-xl font-black mb-6 leading-tight tracking-tight">Post More,<br />Earn More.</h4>
+                  <Link to="/dashboard/purchase-coin" className="inline-block w-full py-3 bg-white text-[#7C3AED] rounded-[1.25rem] font-black text-xs hover:bg-[#FDFDFF] transition-all active:scale-95 shadow-lg">Buy Protocol Pack</Link>
+                </div>
+              </div>
+            </div>
           </nav>
         </aside>
 
-        {/* Main Content */}
-        <main className="flex-1 p-6">
-          <Outlet />
+        {/* Main Content Area */}
+        <main className="flex-1 bg-white rounded-[4rem] p-8 lg:p-16 border border-gray-100 shadow-sm min-h-[75vh] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#F8FAFC] rounded-full blur-[100px] -mr-32 -mt-32"></div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={location.pathname}
+              initial={{ opacity: 0, x: 20, scale: 0.98 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: -20, scale: 0.98 }}
+              transition={{ duration: 0.4, ease: "circOut" }}
+            >
+              <Outlet />
+            </motion.div>
+          </AnimatePresence>
         </main>
       </div>
 
-      {/* Mobile menu button */}
-      <button
-        onClick={() => setSidebarOpen(!sidebarOpen)}
-        className="fixed bottom-4 right-4 md:hidden bg-indigo-600 text-white p-3 rounded-full shadow-lg"
-      >
-        {sidebarOpen ? '✕' : '☰'}
-      </button>
-
-      {/* Click outside to close notifications */}
-      {showNotifications && (
-        <div
-          className="fixed inset-0 z-40"
-          onClick={() => setShowNotifications(false)}
-        />
-      )}
+      <Footer />
     </div>
   );
 };
 
 export default DashboardLayout;
-

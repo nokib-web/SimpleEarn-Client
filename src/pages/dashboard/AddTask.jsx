@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../utils/api';
+import { uploadImageToImgBB } from '../../utils/imgbb';
 
 const AddTask = () => {
   const navigate = useNavigate();
