@@ -69,10 +69,13 @@ const Footer = () => {
                         &copy; {new Date().getFullYear()} SimpleEarn Protocol. All cycles reserved.
                     </p>
                     <div className="flex gap-10 text-[11px] font-black text-[#475569] uppercase tracking-[0.2em] items-center">
-                        <Link to="/register" className="hover:text-white transition-all flex items-center gap-2">
-                            <span className="w-1.5 h-1.5 bg-[#14B8A6] rounded-full"></span>
-                            Status: Live
-                        </Link>
+                        <div className="flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full group cursor-pointer hover:bg-white/10 transition-all">
+                            <span className="relative flex h-2 w-2">
+                                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14B8A6] opacity-75"></span>
+                                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#14B8A6]"></span>
+                            </span>
+                            <span className="text-[10px] font-black uppercase tracking-widest text-[#94A3B8] group-hover:text-white">Protocol Status: Operational</span>
+                        </div>
                         <Link to="/about" className="hover:text-white transition-all">Security</Link>
                         <Link to="/contact" className="hover:text-white transition-all">Compliance</Link>
                     </div>

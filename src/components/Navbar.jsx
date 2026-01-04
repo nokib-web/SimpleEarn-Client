@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useState, useEffect } from 'react';
 import Logo from './Logo';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiOutlineHome, HiOutlineSparkles, HiOutlineLightBulb, HiOutlineEnvelope } from 'react-icons/hi2';
+import { HiOutlineHome, HiOutlineSparkles, HiOutlineLightBulb, HiOutlineEnvelope, HiOutlineBell } from 'react-icons/hi2';
 
 const Navbar = () => {
     const { userData, logout } = useAuth();
@@ -67,6 +67,8 @@ const Navbar = () => {
                                             <span className="text-[#7C3AED] font-black">{userData.coin.toLocaleString()}</span>
                                             <span className="text-[#14B8A6] text-[10px] font-black ml-1 uppercase">Coins</span>
                                         </div>
+
+                                        <NotificationCenter />
 
                                         <div className="relative">
                                             <button
@@ -279,6 +281,71 @@ const Navbar = () => {
                 )}
             </AnimatePresence>
         </>
+    );
+};
+
+const NotificationCenter = () => {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const notifications = [
+        { id: 1, type: 'success', text: 'Task "Data Labeling" approved.', time: '2m ago' },
+        { id: 2, type: 'info', text: 'New high-yield protocol live.', time: '1h ago' },
+        { id: 3, type: 'warning', text: 'Wallet security update required.', time: '3h ago' }
+    ];
+
+    return (
+        <div className="relative">
+            <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-3 bg-[#F8FAFC] border border-[#7C3AED]/10 rounded-2xl text-[#64748B] hover:text-[#7C3AED] hover:border-[#7C3AED]/30 transition-all relative group"
+            >
+                <HiOutlineBell className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                <span className="absolute top-2 right-2 w-2 h-2 bg-[#F97316] rounded-full border-2 border-white"></span>
+            </button>
+
+            <AnimatePresence>
+                {isOpen && (
+                    <>
+                        <motion.div
+                            initial={{ opacity: 0, scale: 1 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 1 }}
+                            className="fixed inset-0 z-40 bg-black/5 backdrop-blur-[2px]"
+                            onClick={() => setIsOpen(false)}
+                        />
+                        <motion.div
+                            initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                            animate={{ opacity: 1, y: 0, scale: 1 }}
+                            exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                            className="absolute right-0 mt-4 w-80 bg-white/90 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-white/20 z-50 overflow-hidden"
+                        >
+                            <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
+                                <h3 className="text-sm font-black text-[#0F172A] uppercase tracking-widest">Notifications</h3>
+                                <span className="text-[10px] font-black text-[#7C3AED] bg-[#7C3AED]/10 px-2 py-1 rounded-lg">3 New</span>
+                            </div>
+                            <div className="max-h-[350px] overflow-y-auto">
+                                {notifications.map((n) => (
+                                    <div key={n.id} className="p-5 border-b border-gray-50 hover:bg-white transition-colors group cursor-pointer">
+                                        <div className="flex gap-4">
+                                            <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${n.type === 'success' ? 'bg-[#14B8A6]' :
+                                                n.type === 'warning' ? 'bg-[#F97316]' : 'bg-[#7C3AED]'
+                                                }`} />
+                                            <div>
+                                                <p className="text-xs font-bold text-[#0F172A] leading-relaxed group-hover:text-[#7C3AED] transition-colors">{n.text}</p>
+                                                <p className="text-[10px] text-[#64748B] font-medium mt-1 uppercase tracking-tighter opacity-60">{n.time}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className="p-4 bg-gray-50/50 text-center">
+                                <button className="text-[10px] font-black text-[#64748B] uppercase tracking-widest hover:text-[#7C3AED] transition-colors">Clear All Feed</button>
+                            </div>
+                        </motion.div>
+                    </>
+                )}
+            </AnimatePresence>
+        </div>
     );
 };
 

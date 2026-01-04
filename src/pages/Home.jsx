@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import api from '../utils/api';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence, useInView } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Container from '../components/Container';
 import {
@@ -12,6 +12,41 @@ import {
   HiOutlineBanknotes,
   HiOutlineUserGroup
 } from 'react-icons/hi2';
+
+const Counter = ({ value, label, prefix = "" }) => {
+  const [displayValue, setDisplayValue] = useState(0);
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const count = parseInt(value.replace(/[^0-9]/g, ''));
+  const suffix = value.replace(/[0-9]/g, '');
+
+  useEffect(() => {
+    if (isInView) {
+      let start = 0;
+      const duration = 2000;
+      const increment = count / (duration / 16);
+      const timer = setInterval(() => {
+        start += increment;
+        if (start >= count) {
+          setDisplayValue(count);
+          clearInterval(timer);
+        } else {
+          setDisplayValue(Math.floor(start));
+        }
+      }, 16);
+      return () => clearInterval(timer);
+    }
+  }, [isInView, count]);
+
+  return (
+    <div ref={ref} className="space-y-1">
+      <p className="text-3xl font-black text-white leading-none">
+        {prefix}{displayValue.toLocaleString()}{suffix}
+      </p>
+      <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">{label}</p>
+    </div>
+  );
+};
 
 const Home = () => {
   const [topWorkers, setTopWorkers] = useState([]);
@@ -106,20 +141,11 @@ const Home = () => {
                 </div>
 
                 <div className="mt-16 flex items-center gap-12 border-t border-white/5 pt-12">
-                  <div className="space-y-1">
-                    <p className="text-3xl font-black text-white leading-none">50k+</p>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Active Nodes</p>
-                  </div>
+                  <Counter value="50000+" label="Active Nodes" />
                   <div className="w-[1px] h-10 bg-white/5"></div>
-                  <div className="space-y-1">
-                    <p className="text-3xl font-black text-white leading-none">1.2M</p>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Tasks Validated</p>
-                  </div>
+                  <Counter value="1200000" label="Tasks Validated" />
                   <div className="w-[1px] h-10 bg-white/5"></div>
-                  <div className="space-y-1">
-                    <p className="text-3xl font-black text-white leading-none">$4.8M+</p>
-                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Node Revenue</p>
-                  </div>
+                  <Counter value="4800000+" label="Node Revenue" prefix="$" />
                 </div>
               </motion.div>
             </div>
