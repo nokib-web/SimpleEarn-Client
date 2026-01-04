@@ -1,13 +1,17 @@
 import { useEffect, useState } from 'react';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay, Pagination, Navigation } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/pagination';
-import 'swiper/css/navigation';
 import api from '../utils/api';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import Container from '../components/Container';
+import {
+  HiOutlineCpuChip,
+  HiOutlineGlobeAlt,
+  HiOutlineShieldCheck,
+  HiOutlineArrowRight,
+  HiOutlineBolt,
+  HiOutlineBanknotes,
+  HiOutlineUserGroup
+} from 'react-icons/hi2';
 
 const Home = () => {
   const [topWorkers, setTopWorkers] = useState([]);
@@ -47,75 +51,192 @@ const Home = () => {
     }
   ];
 
-  const heroSlides = [
-    {
-      title: 'Turning Time into Digital Gold',
-      subtitle: 'The Ultimate Micro-Tasking Platform',
-      description: 'Join over 50,000 active users completing tasks and earning real rewards every single day.',
-      cta: 'Start Earning',
-      link: '/register',
-      bg: 'from-[#1e1b4b] via-[#312e81] to-[#4338ca]'
-    },
-    {
-      title: 'Power Your Business with Ease',
-      subtitle: 'Infinite Workforce at Your Fingertips',
-      description: 'Get your tedious tasks done in minutes by thousands of skilled professionals worldwide.',
-      cta: 'Post a Task',
-      link: '/register',
-      bg: 'from-[#2e1065] via-[#4c1d95] to-[#5b21b6]'
-    }
-  ];
-
   return (
     <div className="bg-[#FDFDFF] overflow-hidden">
-      {/* Hero Section */}
-      <section className="relative min-h-[90vh] flex items-center">
-        <Swiper
-          modules={[Autoplay, Pagination, Navigation]}
-          autoplay={{ delay: 6000 }}
-          pagination={{ clickable: true }}
-          navigation={true}
-          className="w-full h-full absolute inset-0 z-0"
-        >
-          {heroSlides.map((slide, index) => (
-            <SwiperSlide key={index}>
-              <div className={`w-full h-full bg-gradient-to-br ${slide.bg} relative flex items-center justify-center text-center px-4 pt-16`}>
-                <div className="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] animate-pulse-soft"></div>
-                <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-[#7C3AED] rounded-full blur-[160px] opacity-20 animate-float"></div>
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.9, y: 30 }}
-                  whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="max-w-4xl relative z-10"
-                >
-                  <motion.span
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    className="inline-block px-6 py-2 mb-8 text-sm font-black tracking-[0.2em] text-[#A78BFA] uppercase bg-white/5 border border-white/10 rounded-full backdrop-blur-sm"
+      {/* Professional Hero Section */}
+      <section className="relative min-h-[95vh] flex items-center pt-20 pb-32 overflow-hidden bg-[#0F172A]">
+        {/* Dynamic Background Elements */}
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20"></div>
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-[#7C3AED]/20 to-transparent blur-[120px] rounded-full"></div>
+          <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#14B8A6]/10 rounded-full blur-[100px] animate-pulse-soft"></div>
+        </div>
+
+        <Container className="relative z-10">
+          <div className="grid lg:grid-cols-12 gap-16 items-center">
+            {/* Hero Content */}
+            <div className="lg:col-span-7">
+              <motion.div
+                initial={{ opacity: 0, x: -30 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md mb-8">
+                  <span className="flex h-2 w-2 relative">
+                    <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14B8A6] opacity-75"></span>
+                    <span className="relative inline-flex rounded-full h-2 w-2 bg-[#14B8A6]"></span>
+                  </span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70">Protocol v2.4 Live: Global Settlement Enabled</span>
+                </div>
+
+                <h1 className="text-6xl md:text-8xl font-black text-white mb-8 leading-[0.95] tracking-tighter">
+                  The Future of <br />
+                  <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] via-[#A78BFA] to-[#14B8A6]">Distributed Work</span>
+                </h1>
+
+                <p className="text-xl md:text-2xl text-slate-400 mb-12 max-w-2xl font-medium leading-relaxed">
+                  Join the world's most advanced micro-tasking protocol.
+                  High-fidelity validation meets instant liquidity for a truly global workforce.
+                </p>
+
+                <div className="flex flex-col sm:flex-row gap-6">
+                  <Link
+                    to="/register"
+                    className="btn-primary flex items-center justify-center gap-3 !py-5 !px-12 text-lg group shadow-[0_0_40px_rgba(124,58,237,0.3)]"
                   >
-                    {slide.subtitle}
-                  </motion.span>
-                  <h1 className="text-6xl md:text-8xl font-black text-white mb-8 leading-[1.1] tracking-tighter">
-                    {slide.title.split(' ').map((word, i) => (
-                      <span key={i} className={word === 'Gold' || word === 'Business' ? 'text-[#14B8A6]' : ''}>{word} </span>
-                    ))}
-                  </h1>
-                  <p className="text-xl md:text-2xl text-white/70 mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
-                    {slide.description}
-                  </p>
-                  <div className="flex flex-col sm:flex-row gap-6 justify-center">
-                    <Link to={slide.link} className="btn-secondary text-lg px-12 py-5 shadow-2xl shadow-teal-500/20">
-                      {slide.cta}
-                    </Link>
-                    <Link to="/how-it-works" className="px-12 py-5 bg-white/5 text-white rounded-2xl font-black text-lg hover:bg-white/10 transition-all backdrop-blur-md border border-white/20">
-                      Learn More
-                    </Link>
+                    Bootstrap Node
+                    <HiOutlineArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                  <Link
+                    to="/how-it-works"
+                    className="flex items-center justify-center gap-3 px-12 py-5 bg-white/5 text-white rounded-2xl font-black text-lg hover:bg-white/10 transition-all backdrop-blur-md border border-white/10"
+                  >
+                    View Protocol Docs
+                  </Link>
+                </div>
+
+                <div className="mt-16 flex items-center gap-12 border-t border-white/5 pt-12">
+                  <div className="space-y-1">
+                    <p className="text-3xl font-black text-white leading-none">50k+</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Active Nodes</p>
+                  </div>
+                  <div className="w-[1px] h-10 bg-white/5"></div>
+                  <div className="space-y-1">
+                    <p className="text-3xl font-black text-white leading-none">1.2M</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Tasks Validated</p>
+                  </div>
+                  <div className="w-[1px] h-10 bg-white/5"></div>
+                  <div className="space-y-1">
+                    <p className="text-3xl font-black text-white leading-none">$4.8M+</p>
+                    <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">Node Revenue</p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+
+            {/* Visual element side */}
+            <div className="lg:col-span-5 relative hidden lg:block">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8, rotate: 5 }}
+                animate={{ opacity: 1, scale: 1, rotate: 0 }}
+                transition={{ duration: 1.2, ease: "circOut" }}
+                className="relative z-10"
+              >
+                {/* Protocol Interface Mockup */}
+                <div className="bg-[#1E293B] rounded-[3rem] p-8 border border-white/10 shadow-2xl relative overflow-hidden group">
+                  <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#7C3AED] to-transparent opacity-50"></div>
+
+                  <div className="flex items-center justify-between mb-10">
+                    <div className="flex gap-2">
+                      <div className="w-3 h-3 rounded-full bg-red-500/20"></div>
+                      <div className="w-3 h-3 rounded-full bg-amber-500/20"></div>
+                      <div className="w-3 h-3 rounded-full bg-emerald-500/20"></div>
+                    </div>
+                    <div className="px-3 py-1 bg-white/5 rounded-lg border border-white/5 text-[8px] font-black uppercase tracking-widest text-[#14B8A6]">
+                      Secure Session: Active
+                    </div>
+                  </div>
+
+                  <div className="space-y-6">
+                    <div className="p-5 bg-white/5 rounded-2xl border border-white/5 flex items-center gap-4 group-hover:bg-white/10 transition-colors">
+                      <div className="w-12 h-12 bg-[#7C3AED]/20 rounded-xl flex items-center justify-center text-[#7C3AED]">
+                        <HiOutlineBolt className="w-6 h-6" />
+                      </div>
+                      <div className="flex-grow">
+                        <div className="flex justify-between mb-2">
+                          <span className="text-[10px] font-black uppercase text-slate-400">Task Acceleration</span>
+                          <span className="text-[10px] font-black text-[#7C3AED]">98.4%</span>
+                        </div>
+                        <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                          <motion.div
+                            initial={{ width: 0 }}
+                            animate={{ width: '98.4%' }}
+                            transition={{ duration: 2, delay: 0.5 }}
+                            className="h-full bg-[#7C3AED] rounded-full"
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-5 bg-white/5 rounded-2xl border border-white/5 flex items-center gap-4">
+                      <div className="w-12 h-12 bg-[#14B8A6]/20 rounded-xl flex items-center justify-center text-[#14B8A6]">
+                        <HiOutlineBanknotes className="w-6 h-6" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-black uppercase text-slate-400 mb-1">Total Distributed</p>
+                        <p className="text-2xl font-black text-white">412,890.00 <span className="text-xs text-slate-500">Coins</span></p>
+                      </div>
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
+                        <HiOutlineUserGroup className="w-5 h-5 text-slate-500 mb-3" />
+                        <p className="text-sm font-black text-white">12,402</p>
+                        <p className="text-[8px] font-black uppercase text-slate-500">Verified Workers</p>
+                      </div>
+                      <div className="p-4 bg-[#7C3AED]/10 rounded-2xl border border-[#7C3AED]/20">
+                        <HiOutlineGlobeAlt className="w-5 h-5 text-[#7C3AED] mb-3" />
+                        <p className="text-sm font-black text-white">142</p>
+                        <p className="text-[8px] font-black uppercase text-[#7C3AED]">Global Regions</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="mt-8 pt-8 border-t border-white/5 flex justify-center">
+                    <div className="flex gap-4">
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#14B8A6] animate-pulse"></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#14B8A6] animate-pulse [animation-delay:0.2s]"></div>
+                      <div className="w-1.5 h-1.5 rounded-full bg-[#14B8A6] animate-pulse [animation-delay:0.4s]"></div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Floating Elements */}
+                <motion.div
+                  animate={{ y: [0, -15, 0] }}
+                  transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+                  className="absolute -top-12 -right-12 p-6 glass-card !bg-[#0F172A]/80 rounded-3xl border border-white/10 shadow-3xl z-20"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-[#14B8A6] rounded-xl flex items-center justify-center text-white">
+                      <HiOutlineShieldCheck className="w-6 h-6" />
+                    </div>
+                    <div>
+                      <p className="text-xs font-black text-white">Verified Peer</p>
+                      <p className="text-[8px] font-black text-[#14B8A6] uppercase tracking-widest">Protocol Secured</p>
+                    </div>
                   </div>
                 </motion.div>
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
+
+                <motion.div
+                  animate={{ y: [0, 15, 0] }}
+                  transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                  className="absolute -bottom-12 -left-12 p-6 glass-card !bg-[#7C3AED] rounded-3xl border border-white/20 shadow-3xl z-20"
+                >
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center text-white">
+                      <HiOutlineCpuChip className="w-6 h-6" />
+                    </div>
+                    <div className="text-white">
+                      <p className="text-xs font-black">Neural Link</p>
+                      <p className="text-[8px] font-black text-white/60 uppercase tracking-widest">Processing Node</p>
+                    </div>
+                  </div>
+                </motion.div>
+              </motion.div>
+            </div>
+          </div>
+        </Container>
       </section>
 
       {/* Trusted By Section */}
