@@ -114,7 +114,7 @@ const Home = () => {
                   <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 dark:text-white/70">Protocol v2.4 Live: Global Settlement Enabled</span>
                 </div>
 
-                <h1 className="text-6xl md:text-8xl font-black text-[#0F172A] dark:text-white mb-8 leading-[0.95] tracking-tighter">
+                <h1 className="text-4xl sm:text-5xl md:text-8xl font-black text-[#0F172A] dark:text-white mb-8 leading-[0.95] tracking-tighter">
                   The Future of <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] via-[#A78BFA] to-[#14B8A6]">Distributed Work</span>
                 </h1>
@@ -140,11 +140,11 @@ const Home = () => {
                   </Link>
                 </div>
 
-                <div className="mt-16 flex items-center gap-12 border-t border-slate-200 dark:border-white/5 pt-12">
+                <div className="mt-16 flex flex-col sm:flex-row items-center sm:items-start gap-8 sm:gap-12 border-t border-slate-200 dark:border-white/5 pt-12">
                   <Counter value="50000+" label="Active Nodes" />
-                  <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/5"></div>
+                  <div className="hidden sm:block w-[1px] h-10 bg-slate-200 dark:bg-white/5"></div>
                   <Counter value="1200000" label="Tasks Validated" />
-                  <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/5"></div>
+                  <div className="hidden sm:block w-[1px] h-10 bg-slate-200 dark:bg-white/5"></div>
                   <Counter value="4800000+" label="Node Revenue" prefix="$" />
                 </div>
               </motion.div>
@@ -289,7 +289,7 @@ const Home = () => {
             className="text-center mb-24"
           >
             <span className="text-[#14B8A6] font-black uppercase tracking-widest text-sm mb-4 block">Platform Excellence</span>
-            <h2 className="text-5xl md:text-7xl font-black text-[#0F172A] dark:text-white mb-6 tracking-tighter">Elite <span className="text-[#7C3AED]">Earners</span> Gallery</h2>
+            <h2 className="text-4xl md:text-7xl font-black text-[#0F172A] dark:text-white mb-6 tracking-tighter">Elite <span className="text-[#7C3AED]">Earners</span> Gallery</h2>
             <p className="text-xl text-[#64748B] dark:text-[#94A3B8] max-w-2xl mx-auto font-medium">Celebrating the masters of the micro-tasking ecosystem.</p>
           </motion.div>
 
@@ -347,7 +347,7 @@ const Home = () => {
               >
                 Premium Infrastructure
               </motion.span>
-              <h2 className="text-5xl md:text-7xl font-black mb-12 leading-[1.05] tracking-tighter">Built for <span className="text-[#7C3AED]">Security</span>, Scaled for Growth.</h2>
+              <h2 className="text-4xl md:text-7xl font-black mb-12 leading-[1.05] tracking-tighter">Built for <span className="text-[#7C3AED]">Security</span>, Scaled for Growth.</h2>
               <div className="space-y-10">
                 {[
                   { t: "Node-Link Verification", d: "Our proprietary validation engine verifies every human-task interaction in milliseconds.", i: "🔗" },
@@ -406,7 +406,7 @@ const Home = () => {
         <Container className="max-w-4xl">
           <div className="text-center mb-24">
             <span className="text-[#F97316] font-black uppercase tracking-widest text-sm mb-4 block">Support Center</span>
-            <h2 className="text-5xl md:text-7xl font-black text-[#0F172A] dark:text-white mb-6 tracking-tighter">Insights & <span className="text-[#14B8A6]">Answers</span></h2>
+            <h2 className="text-4xl md:text-7xl font-black text-[#0F172A] dark:text-white mb-6 tracking-tighter">Insights & <span className="text-[#14B8A6]">Answers</span></h2>
             <p className="text-xl text-[#64748B] dark:text-[#94A3B8] font-medium">Technical documentation for the global earner.</p>
           </div>
 
@@ -459,7 +459,7 @@ const Home = () => {
           >
             <div className="absolute top-0 left-0 -ml-20 -mt-20 w-80 h-80 bg-white/10 rounded-full blur-[100px]"></div>
             <div className="max-w-2xl text-center lg:text-left relative z-10">
-              <h2 className="text-4xl md:text-6xl font-black text-white mb-6 tracking-tighter leading-tight">Master the <span className="text-[#14B8A6]">Digital</span> Economy.</h2>
+              <h2 className="text-3xl md:text-6xl font-black text-white mb-6 tracking-tighter leading-tight">Master the <span className="text-[#14B8A6]">Digital</span> Economy.</h2>
               <p className="text-xl text-purple-100/70 font-medium">Join 15,000+ top performers receiving premium task alerts.</p>
             </div>
             <form className="w-full max-w-lg flex flex-col md:flex-row gap-4 relative z-10">
@@ -483,7 +483,7 @@ const Home = () => {
             <div className="absolute top-0 left-0 -ml-24 -mt-24 w-96 h-96 bg-[#7C3AED]/5 rounded-full blur-[120px] group-hover:bg-[#7C3AED]/10 transition-colors duration-1000"></div>
             <div className="relative z-10">
               <span className="text-[#F97316] font-black uppercase tracking-[0.4em] text-xs mb-8 block">Next Generation Micro-Tasking</span>
-              <h2 className="text-6xl md:text-8xl font-black text-[#0F172A] dark:text-white mb-10 tracking-tighter leading-tight">Ready to <span className="text-[#7C3AED]">Protocol?</span></h2>
+              <h2 className="text-4xl md:text-8xl font-black text-[#0F172A] dark:text-white mb-10 tracking-tighter leading-tight">Ready to <span className="text-[#7C3AED]">Protocol?</span></h2>
               <p className="text-2xl text-[#64748B] dark:text-[#94A3B8] mb-16 max-w-3xl mx-auto font-medium leading-relaxed">Join the most advanced earning network. Low latency. High security. Instant liquidity.</p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link to="/register" className="btn-primary text-xl px-16 py-6 shadow-2xl shadow-purple-500/30">
