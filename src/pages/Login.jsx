@@ -38,10 +38,10 @@ const Login = () => {
   };
 
   return (
-    <div className="py-12 md:py-24 bg-[#FDFDFF] min-h-[calc(100vh-80px)] flex items-center">
+    <div className="py-12 md:py-24 bg-[#FDFDFF] dark:bg-[#0F172A] min-h-[calc(100vh-80px)] flex items-center transition-colors duration-300">
       <Container>
         <div className="max-w-5xl mx-auto">
-          <div className="bg-white rounded-[4rem] shadow-2xl shadow-purple-100 border border-gray-100 overflow-hidden flex flex-col lg:flex-row">
+          <div className="bg-white dark:bg-[#1E293B] rounded-[4rem] shadow-2xl shadow-purple-100 dark:shadow-none border border-gray-100 dark:border-gray-800 overflow-hidden flex flex-col lg:flex-row">
 
             {/* Left Side: Security Badge Visual */}
             <div className="lg:w-5/12 bg-[#0F172A] p-12 text-white relative overflow-hidden flex flex-col justify-between">
@@ -92,8 +92,8 @@ const Login = () => {
             {/* Right Side: Login Form */}
             <div className="lg:w-7/12 p-12 md:p-16">
               <div className="mb-12">
-                <h2 className="text-3xl font-black text-[#0F172A] tracking-tighter mb-2">Welcome Back</h2>
-                <p className="text-[#64748B] font-medium">Authentication required to bridge to protocol.</p>
+                <h2 className="text-3xl font-black text-[#0F172A] dark:text-white tracking-tighter mb-2">Welcome Back</h2>
+                <p className="text-[#64748B] dark:text-[#94A3B8] font-medium">Authentication required to bridge to protocol.</p>
               </div>
 
               {error && (
@@ -109,13 +109,13 @@ const Login = () => {
 
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] ml-2">Email Identity</label>
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] dark:text-[#94A3B8] ml-2">Email Identity</label>
                   <div className="relative group">
-                    <HiOutlineEnvelope className="absolute left-6 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED] text-[#94A3B8]" />
+                    <HiOutlineEnvelope className="absolute left-6 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED] text-[#94A3B8] dark:text-[#64748B]" />
                     <input
                       type="email"
                       {...register('email', { required: 'Email is required' })}
-                      className="w-full pl-14 pr-6 py-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl focus:bg-white focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A]"
+                      className="w-full pl-14 pr-6 py-4 bg-[#F8FAFC] dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-gray-700/50 rounded-2xl focus:bg-white dark:focus:bg-[#1E293B] focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600"
                       placeholder="john@protocol.io"
                     />
                   </div>
@@ -123,15 +123,15 @@ const Login = () => {
 
                 <div className="space-y-2">
                   <div className="flex justify-between items-center ml-2">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B]">Security Key</label>
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] dark:text-[#94A3B8]">Security Key</label>
                     <Link to="#" className="text-[10px] font-black uppercase tracking-widest text-[#7C3AED] hover:underline">Forgot Key?</Link>
                   </div>
                   <div className="relative group">
-                    <HiOutlineLockClosed className="absolute left-6 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED] text-[#94A3B8]" />
+                    <HiOutlineLockClosed className="absolute left-6 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED] text-[#94A3B8] dark:text-[#64748B]" />
                     <input
                       type="password"
                       {...register('password', { required: 'Password is required' })}
-                      className="w-full pl-14 pr-6 py-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl focus:bg-white focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A]"
+                      className="w-full pl-14 pr-6 py-4 bg-[#F8FAFC] dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-gray-700/50 rounded-2xl focus:bg-white dark:focus:bg-[#1E293B] focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600"
                       placeholder="••••••••"
                     />
                   </div>
@@ -156,7 +156,7 @@ const Login = () => {
                   <button
                     type="button"
                     onClick={handleGoogleLogin}
-                    className="w-full py-5 border border-[#E2E8F0] rounded-2xl flex items-center justify-center gap-3 hover:bg-[#F8FAFC] transition-all font-black text-xs uppercase tracking-widest text-[#64748B]"
+                    className="w-full py-5 border border-[#E2E8F0] dark:border-gray-700 rounded-2xl flex items-center justify-center gap-3 hover:bg-[#F8FAFC] dark:hover:bg-[#0F172A] transition-all font-black text-xs uppercase tracking-widest text-[#64748B] dark:text-[#94A3B8]"
                   >
                     <svg className="w-5 h-5" viewBox="0 0 24 24">
                       <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4" />
@@ -168,7 +168,7 @@ const Login = () => {
                   </button>
                 </div>
 
-                <p className="text-center text-xs font-bold text-[#64748B]">
+                <p className="text-center text-xs font-bold text-[#64748B] dark:text-[#94A3B8]">
                   New to Protocol? <Link to="/register" className="text-[#14B8A6] hover:underline underline-offset-4">Bootstrap Node</Link>
                 </p>
               </form>

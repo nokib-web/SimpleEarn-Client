@@ -45,7 +45,7 @@ const BlogDetails = () => {
     }
 
     return (
-        <div className="bg-white min-h-screen">
+        <div className="bg-white dark:bg-[#0F172A] min-h-screen transition-colors duration-300">
             {/* Reading Progress Bar */}
             <motion.div
                 className="fixed top-20 left-0 right-0 h-1 bg-[#7C3AED] z-[1001] origin-left"
@@ -53,10 +53,10 @@ const BlogDetails = () => {
             />
 
             {/* Header / Hero */}
-            <header className="relative py-20 bg-[#F8FAFC] overflow-hidden">
-                <div className="absolute inset-0 bg-grid-slate-100 [mask-image:linear-gradient(0deg,white,transparent)] -z-1"></div>
+            <header className="relative py-20 bg-[#F8FAFC] dark:bg-[#1E293B] overflow-hidden">
+                <div className="absolute inset-0 bg-grid-slate-100 dark:bg-grid-slate-800/10 [mask-image:linear-gradient(0deg,white,transparent)] dark:[mask-image:linear-gradient(0deg,rgba(0,0,0,1),transparent)] -z-1"></div>
                 <Container>
-                    <Link to="/blog" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] hover:text-[#7C3AED] transition-colors mb-12">
+                    <Link to="/blog" className="inline-flex items-center gap-2 text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] dark:text-[#94A3B8] hover:text-[#7C3AED] transition-colors mb-12">
                         <HiOutlineArrowLeft className="w-4 h-4" />
                         Back to Protocol Feed
                     </Link>
@@ -77,7 +77,7 @@ const BlogDetails = () => {
                         <motion.h1
                             initial={{ opacity: 0, y: 20 }}
                             animate={{ opacity: 1, y: 0 }}
-                            className="text-4xl md:text-6xl font-black text-[#0F172A] tracking-tighter mb-10 leading-[1.1]"
+                            className="text-4xl md:text-6xl font-black text-[#0F172A] dark:text-white tracking-tighter mb-10 leading-[1.1]"
                         >
                             {blog.title}
                         </motion.h1>
@@ -89,11 +89,11 @@ const BlogDetails = () => {
                             className="flex items-center flex-wrap gap-8 text-[11px] font-black uppercase tracking-widest text-[#64748B]"
                         >
                             <div className="flex items-center gap-3">
-                                <div className="w-10 h-10 rounded-xl border border-gray-200 overflow-hidden shadow-sm">
+                                <div className="w-10 h-10 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden shadow-sm">
                                     <img src={blog.author?.image || `https://ui-avatars.com/api/?name=${blog.author?.name}`} />
                                 </div>
                                 <div>
-                                    <p className="text-[#0F172A]">{blog.author?.name}</p>
+                                    <p className="text-[#0F172A] dark:text-white">{blog.author?.name}</p>
                                     <p className="opacity-60">Protocol Authority</p>
                                 </div>
                             </div>
@@ -116,18 +116,18 @@ const BlogDetails = () => {
                     <div className="grid lg:grid-cols-[1fr_300px] gap-20">
                         {/* Article Content */}
                         <article className="max-w-3xl">
-                            <div className="rounded-[3rem] overflow-hidden mb-16 shadow-2xl shadow-purple-100 border border-gray-100">
+                            <div className="rounded-[3rem] overflow-hidden mb-16 shadow-2xl shadow-purple-100 dark:shadow-none border border-gray-100 dark:border-gray-800">
                                 <img src={blog.image} alt={blog.title} className="w-full object-cover" />
                             </div>
 
                             <div
-                                className="prose prose-slate prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-[#0F172A] prose-p:text-[#64748B] prose-p:leading-relaxed prose-a:text-[#7C3AED] prose-strong:text-[#0F172A]"
+                                className="prose prose-slate dark:prose-invert prose-lg max-w-none prose-headings:font-black prose-headings:tracking-tighter prose-headings:text-[#0F172A] dark:prose-headings:text-white prose-p:text-[#64748B] dark:prose-p:text-[#94A3B8] prose-p:leading-relaxed prose-a:text-[#7C3AED] prose-strong:text-[#0F172A] dark:prose-strong:text-white"
                                 dangerouslySetInnerHTML={{ __html: blog.content }}
                             />
 
-                            <div className="mt-20 pt-10 border-t border-gray-100 flex items-center justify-between">
+                            <div className="mt-20 pt-10 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
                                 <div className="flex items-center gap-4">
-                                    <button className="flex items-center gap-2 px-6 py-3 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl text-[10px] font-black uppercase tracking-widest text-[#64748B] hover:text-[#7C3AED] hover:border-[#7C3AED] transition-all">
+                                    <button className="flex items-center gap-2 px-6 py-3 bg-[#F8FAFC] dark:bg-[#1E293B] border border-[#E2E8F0] dark:border-gray-800 rounded-2xl text-[10px] font-black uppercase tracking-widest text-[#64748B] dark:text-[#94A3B8] hover:text-[#7C3AED] hover:border-[#7C3AED] transition-all">
                                         <HiOutlineShare className="w-4 h-4" />
                                         Distribute
                                     </button>
@@ -140,19 +140,19 @@ const BlogDetails = () => {
 
                         {/* Sidebar */}
                         <aside className="space-y-12">
-                            <div className="p-8 bg-[#F8FAFC] border border-[#E2E8F0] rounded-[2.5rem]">
-                                <h3 className="text-sm font-black text-[#0F172A] uppercase tracking-widest mb-6">Article Metadata</h3>
+                            <div className="p-8 bg-[#F8FAFC] dark:bg-[#1E293B] border border-[#E2E8F0] dark:border-gray-800 rounded-[2.5rem]">
+                                <h3 className="text-sm font-black text-[#0F172A] dark:text-white uppercase tracking-widest mb-6">Article Metadata</h3>
                                 <div className="space-y-4">
-                                    <div className="flex justify-between items-center py-3 border-b border-gray-200/50">
-                                        <span className="text-[10px] font-black text-[#64748B] uppercase tracking-widest">Protocol Version</span>
-                                        <span className="text-[10px] font-bold text-[#0F172A]">v2.4.0</span>
+                                    <div className="flex justify-between items-center py-3 border-b border-gray-200/50 dark:border-gray-700/50">
+                                        <span className="text-[10px] font-black text-[#64748B] dark:text-[#94A3B8] uppercase tracking-widest">Protocol Version</span>
+                                        <span className="text-[10px] font-bold text-[#0F172A] dark:text-white">v2.4.0</span>
                                     </div>
-                                    <div className="flex justify-between items-center py-3 border-b border-gray-200/50">
-                                        <span className="text-[10px] font-black text-[#64748B] uppercase tracking-widest">Visibility</span>
+                                    <div className="flex justify-between items-center py-3 border-b border-gray-200/50 dark:border-gray-700/50">
+                                        <span className="text-[10px] font-black text-[#64748B] dark:text-[#94A3B8] uppercase tracking-widest">Visibility</span>
                                         <span className="text-[10px] font-bold text-[#14B8A6]">Global Network</span>
                                     </div>
-                                    <div className="flex justify-between items-center py-3 border-b border-gray-200/50">
-                                        <span className="text-[10px] font-black text-[#64748B] uppercase tracking-widest">Verification</span>
+                                    <div className="flex justify-between items-center py-3 border-b border-gray-200/50 dark:border-gray-700/50">
+                                        <span className="text-[10px] font-black text-[#64748B] dark:text-[#94A3B8] uppercase tracking-widest">Verification</span>
                                         <span className="text-[10px] font-bold text-[#7C3AED]">Signed PKI</span>
                                     </div>
                                 </div>

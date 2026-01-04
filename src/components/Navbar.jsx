@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import Logo from './Logo';
 import { motion, AnimatePresence } from 'framer-motion';
 import { HiOutlineHome, HiOutlineSparkles, HiOutlineLightBulb, HiOutlineEnvelope, HiOutlineBell, HiOutlineNewspaper } from 'react-icons/hi2';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
     const { userData, logout } = useAuth();
@@ -37,7 +38,7 @@ const Navbar = () => {
 
     return (
         <>
-            <nav className="bg-white/80 backdrop-blur-md sticky top-0 z-[1000] border-b border-gray-100 h-20 flex items-center shadow-sm">
+            <nav className="bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-md sticky top-0 z-[1000] border-b border-gray-100 dark:border-gray-800 h-20 flex items-center shadow-sm">
                 <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8">
                     <div className="flex justify-between items-center">
                         <div className="flex items-center space-x-12">
@@ -48,7 +49,7 @@ const Navbar = () => {
                                     <Link
                                         key={link.name}
                                         to={link.path}
-                                        className={`text-[15px] font-bold transition-all relative group ${isActive(link.path) ? 'text-[#7C3AED]' : 'text-[#64748B] hover:text-[#7C3AED]'
+                                        className={`text-[15px] font-bold transition-all relative group ${isActive(link.path) ? 'text-[#7C3AED]' : 'text-[#64748B] dark:text-[#94A3B8] hover:text-[#7C3AED]'
                                             }`}
                                     >
                                         {link.name}
@@ -60,11 +61,12 @@ const Navbar = () => {
                         </div>
 
                         <div className="flex items-center space-x-4">
+                            <ThemeToggle />
                             <div className="hidden lg:flex items-center space-x-4">
                                 {userData ? (
                                     <div className="flex items-center gap-4">
-                                        <div className="flex items-center bg-[#F8FAFC] border border-[#7C3AED]/10 px-4 py-2 rounded-2xl">
-                                            <span className="text-[#64748B] text-xs font-black uppercase tracking-widest mr-2">Wallet:</span>
+                                        <div className="flex items-center bg-[#F8FAFC] dark:bg-[#1E293B] border border-[#7C3AED]/10 px-4 py-2 rounded-2xl transition-colors">
+                                            <span className="text-[#64748B] dark:text-[#94A3B8] text-xs font-black uppercase tracking-widest mr-2">Wallet:</span>
                                             <span className="text-[#7C3AED] font-black">{userData.coin.toLocaleString()}</span>
                                             <span className="text-[#14B8A6] text-[10px] font-black ml-1 uppercase">Coins</span>
                                         </div>
@@ -74,7 +76,7 @@ const Navbar = () => {
                                         <div className="relative">
                                             <button
                                                 onClick={() => setShowDropdown(!showDropdown)}
-                                                className="flex items-center gap-2 p-1 bg-white border border-gray-100 rounded-[1.25rem] hover:shadow-lg transition-all"
+                                                className="flex items-center gap-2 p-1 bg-white dark:bg-[#1E293B] border border-gray-100 dark:border-gray-800 rounded-[1.25rem] hover:shadow-lg transition-all"
                                             >
                                                 <img
                                                     src={userData.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name)}`}
@@ -92,19 +94,19 @@ const Navbar = () => {
                                                         initial={{ opacity: 0, y: 10, scale: 0.95 }}
                                                         animate={{ opacity: 1, y: 0, scale: 1 }}
                                                         exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                                                        className="absolute right-0 mt-4 w-64 bg-white rounded-[2rem] shadow-2xl border border-gray-100 py-4 z-50 overflow-hidden"
+                                                        className="absolute right-0 mt-4 w-64 bg-white dark:bg-[#1E293B] rounded-[2rem] shadow-2xl border border-gray-100 dark:border-gray-800 py-4 z-50 overflow-hidden"
                                                     >
-                                                        <div className="px-6 py-4 border-b border-gray-50 flex items-center gap-3">
+                                                        <div className="px-6 py-4 border-b border-gray-50 dark:border-gray-700/50 flex items-center gap-3">
                                                             <div className="w-10 h-10 bg-[#7C3AED]/10 rounded-xl flex items-center justify-center text-[#7C3AED] font-black text-xs">
                                                                 {userData.name.charAt(0)}
                                                             </div>
                                                             <div>
-                                                                <p className="text-sm font-black text-[#0F172A] leading-none mb-1">{userData.name}</p>
-                                                                <p className="text-[10px] text-[#64748B] font-bold uppercase tracking-widest">{userData.role}</p>
+                                                                <p className="text-sm font-black text-[#0F172A] dark:text-white leading-none mb-1">{userData.name}</p>
+                                                                <p className="text-[10px] text-[#64748B] dark:text-[#94A3B8] font-bold uppercase tracking-widest">{userData.role}</p>
                                                             </div>
                                                         </div>
                                                         <div className="p-2">
-                                                            <Link to="/dashboard" className="flex items-center gap-3 px-4 py-3 rounded-xl text-[14px] font-bold text-[#64748B] hover:bg-[#F8FAFC] hover:text-[#7C3AED] transition-all">
+                                                            <Link to="/dashboard" className="flex items-center gap-3 px-4 py-3 rounded-xl text-[14px] font-bold text-[#64748B] dark:text-[#94A3B8] hover:bg-[#F8FAFC] dark:hover:bg-white/5 hover:text-[#7C3AED] transition-all">
                                                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" /></svg>
                                                                 Dashboard
                                                             </Link>
@@ -298,7 +300,7 @@ const NotificationCenter = () => {
         <div className="relative">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="p-3 bg-[#F8FAFC] border border-[#7C3AED]/10 rounded-2xl text-[#64748B] hover:text-[#7C3AED] hover:border-[#7C3AED]/30 transition-all relative group"
+                className="p-3 bg-[#F8FAFC] dark:bg-[#1E293B] border border-[#7C3AED]/10 dark:border-[#7C3AED]/20 rounded-2xl text-[#64748B] dark:text-[#94A3B8] hover:text-[#7C3AED] hover:border-[#7C3AED]/30 transition-all relative group"
             >
                 <HiOutlineBell className="w-5 h-5 group-hover:scale-110 transition-transform" />
                 <span className="absolute top-2 right-2 w-2 h-2 bg-[#F97316] rounded-full border-2 border-white"></span>
@@ -318,28 +320,28 @@ const NotificationCenter = () => {
                             initial={{ opacity: 0, y: 10, scale: 0.95 }}
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                            className="absolute right-0 mt-4 w-80 bg-white/90 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-white/20 z-50 overflow-hidden"
+                            className="absolute right-0 mt-4 w-80 bg-white/90 dark:bg-[#1E293B]/95 backdrop-blur-xl rounded-[2.5rem] shadow-2xl border border-white/20 dark:border-gray-700 z-50 overflow-hidden"
                         >
-                            <div className="p-6 border-b border-gray-100 flex justify-between items-center bg-gray-50/50">
-                                <h3 className="text-sm font-black text-[#0F172A] uppercase tracking-widest">Notifications</h3>
+                            <div className="p-6 border-b border-gray-100 dark:border-gray-700 flex justify-between items-center bg-gray-50/50 dark:bg-white/5">
+                                <h3 className="text-sm font-black text-[#0F172A] dark:text-white uppercase tracking-widest">Notifications</h3>
                                 <span className="text-[10px] font-black text-[#7C3AED] bg-[#7C3AED]/10 px-2 py-1 rounded-lg">3 New</span>
                             </div>
                             <div className="max-h-[350px] overflow-y-auto">
                                 {notifications.map((n) => (
-                                    <div key={n.id} className="p-5 border-b border-gray-50 hover:bg-white transition-colors group cursor-pointer">
+                                    <div key={n.id} className="p-5 border-b border-gray-50 dark:border-gray-700/50 hover:bg-white dark:hover:bg-white/5 transition-colors group cursor-pointer">
                                         <div className="flex gap-4">
                                             <div className={`w-2 h-2 rounded-full mt-1.5 shrink-0 ${n.type === 'success' ? 'bg-[#14B8A6]' :
                                                 n.type === 'warning' ? 'bg-[#F97316]' : 'bg-[#7C3AED]'
                                                 }`} />
                                             <div>
-                                                <p className="text-xs font-bold text-[#0F172A] leading-relaxed group-hover:text-[#7C3AED] transition-colors">{n.text}</p>
-                                                <p className="text-[10px] text-[#64748B] font-medium mt-1 uppercase tracking-tighter opacity-60">{n.time}</p>
+                                                <p className="text-xs font-bold text-[#0F172A] dark:text-gray-200 leading-relaxed group-hover:text-[#7C3AED] transition-colors">{n.text}</p>
+                                                <p className="text-[10px] text-[#64748B] dark:text-[#94A3B8] font-medium mt-1 uppercase tracking-tighter opacity-60">{n.time}</p>
                                             </div>
                                         </div>
                                     </div>
                                 ))}
                             </div>
-                            <div className="p-4 bg-gray-50/50 text-center">
+                            <div className="p-4 bg-gray-50/50 dark:bg-white/5 text-center">
                                 <button className="text-[10px] font-black text-[#64748B] uppercase tracking-widest hover:text-[#7C3AED] transition-colors">Clear All Feed</button>
                             </div>
                         </motion.div>

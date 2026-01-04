@@ -4,6 +4,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useState, useEffect } from 'react';
 import api from '../utils/api';
 import Logo from '../components/Logo';
+import ThemeToggle from '../components/ThemeToggle';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   HiOutlineHome,
@@ -98,21 +99,21 @@ const DashboardLayout = () => {
 
   if (!userData) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#FDFDFF]">
-        <div className="w-12 h-12 border-4 border-purple-100 border-t-[#7C3AED] rounded-full animate-spin"></div>
+      <div className="min-h-screen flex items-center justify-center bg-[#FDFDFF] dark:bg-[#0F172A]">
+        <div className="w-12 h-12 border-4 border-purple-100 dark:border-purple-900/30 border-t-[#7C3AED] rounded-full animate-spin"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#FDFDFF] flex flex-col font-sans">
+    <div className="min-h-screen bg-[#FDFDFF] dark:bg-[#0F172A] flex flex-col font-sans">
       {/* Header */}
-      <header className="sticky top-0 z-[1000] bg-white/80 backdrop-blur-md border-b border-gray-100 shadow-sm">
+      <header className="sticky top-0 z-[1000] bg-white/80 dark:bg-[#0F172A]/80 backdrop-blur-md border-b border-gray-100 dark:border-gray-800 shadow-sm">
         <div className="max-w-7xl mx-auto px-4 h-20 flex items-center justify-between">
           <div className="flex items-center gap-4">
             <button
               onClick={() => setSidebarOpen(!sidebarOpen)}
-              className="p-2 mr-2 rounded-xl hover:bg-gray-100 text-[#64748B] transition-colors md:hidden"
+              className="p-2 mr-2 rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 text-[#64748B] dark:text-[#94A3B8] transition-colors md:hidden"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
@@ -122,19 +123,20 @@ const DashboardLayout = () => {
           </div>
 
           <div className="flex items-center gap-3 md:gap-6">
-            <div className="hidden sm:flex items-center bg-[#F8FAFC] border border-[#7C3AED]/10 rounded-2xl px-4 py-2">
+            <ThemeToggle />
+            <div className="hidden sm:flex items-center bg-[#F8FAFC] dark:bg-[#1E293B] border border-[#7C3AED]/10 dark:border-[#7C3AED]/20 rounded-2xl px-4 py-2">
               <span className="w-2h-2 bg-[#7C3AED] rounded-full animate-pulse mr-2 hidden lg:block"></span>
-              <span className="text-[#64748B] text-sm font-bold mr-2">Wallet:</span>
+              <span className="text-[#64748B] dark:text-[#94A3B8] text-sm font-bold mr-2">Wallet:</span>
               <span className="text-[#7C3AED] font-extrabold">{userData.coin.toLocaleString()}</span>
-              <span className="text-[#14B8A6] text-xs font-bold ml-1 uppercase border-l border-gray-100 pl-2">Coins</span>
+              <span className="text-[#14B8A6] text-xs font-bold ml-1 uppercase border-l border-gray-100 dark:border-gray-700 pl-2">Coins</span>
             </div>
 
             <div className="relative">
               <button
                 onClick={() => setShowNotifications(!showNotifications)}
-                className="relative p-3 bg-white border border-gray-100 rounded-2xl hover:bg-gray-50 hover:shadow-md transition-all group"
+                className="relative p-3 bg-white dark:bg-[#1E293B] border border-gray-100 dark:border-gray-800 rounded-2xl hover:bg-gray-50 dark:hover:bg-white/5 hover:shadow-md transition-all group"
               >
-                <svg className="w-6 h-6 text-[#64748B] group-hover:text-[#7C3AED] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg className="w-6 h-6 text-[#64748B] dark:text-[#94A3B8] group-hover:text-[#7C3AED] transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
                 </svg>
                 {notificationCount > 0 && (
@@ -148,21 +150,21 @@ const DashboardLayout = () => {
                     initial={{ opacity: 0, y: 10, scale: 0.95 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.95 }}
-                    className="absolute right-0 mt-4 w-96 bg-white rounded-3xl shadow-2xl shadow-purple-100 border border-gray-100 overflow-hidden z-50 ring-1 ring-black/5"
+                    className="absolute right-0 mt-4 w-96 bg-white dark:bg-[#1E293B] rounded-3xl shadow-2xl shadow-purple-100 dark:shadow-none border border-gray-100 dark:border-gray-800 overflow-hidden z-50 ring-1 ring-black/5"
                   >
-                    <div className="p-6 bg-gray-50/50 border-b border-gray-100 flex items-center justify-between">
-                      <h3 className="font-black text-[#0F172A] text-sm uppercase tracking-widest">Protocol Alerts</h3>
+                    <div className="p-6 bg-gray-50/50 dark:bg-white/5 border-b border-gray-100 dark:border-gray-800 flex items-center justify-between">
+                      <h3 className="font-black text-[#0F172A] dark:text-white text-sm uppercase tracking-widest">Protocol Alerts</h3>
                       <span className="px-2.5 py-1 bg-[#7C3AED]/10 text-[#7C3AED] text-[10px] font-black rounded-lg uppercase tracking-wider">{notificationCount} New</span>
                     </div>
                     <div className="max-h-[400px] overflow-y-auto overflow-x-hidden p-2">
                       {notifications.length === 0 ? (
-                        <div className="p-12 text-center text-gray-400 font-medium">No system updates.</div>
+                        <div className="p-12 text-center text-gray-400 dark:text-gray-500 font-medium">No system updates.</div>
                       ) : (
                         <div className="space-y-1">
                           {notifications.map((notification) => (
                             <div
                               key={notification._id}
-                              className={`p-4 rounded-2xl hover:bg-[#F8FAFC] transition-colors cursor-pointer relative group ${!notification.isRead ? 'bg-[#7C3AED]/5' : ''}`}
+                              className={`p-4 rounded-2xl hover:bg-[#F8FAFC] dark:hover:bg-white/5 transition-colors cursor-pointer relative group ${!notification.isRead ? 'bg-[#7C3AED]/5' : ''}`}
                               onClick={() => {
                                 if (!notification.isRead) {
                                   api.patch(`/notifications/${notification._id}/read`);
@@ -178,7 +180,7 @@ const DashboardLayout = () => {
                               <div className="flex gap-4">
                                 <div className={`w-2 h-2 rounded-full mt-2 flex-shrink-0 ${!notification.isRead ? 'bg-[#7C3AED]' : 'bg-transparent'}`}></div>
                                 <div>
-                                  <p className="text-sm font-bold text-[#475569] leading-snug group-hover:text-[#7C3AED] transition-colors">{notification.message}</p>
+                                  <p className="text-sm font-bold text-[#475569] dark:text-gray-300 leading-snug group-hover:text-[#7C3AED] transition-colors">{notification.message}</p>
                                   <p className="text-[10px] text-[#94A3B8] font-black uppercase tracking-wider mt-2 flex items-center gap-2">
                                     <span className="w-1 h-1 bg-gray-200 rounded-full"></span>
                                     {new Date(notification.time).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
@@ -195,23 +197,23 @@ const DashboardLayout = () => {
               </AnimatePresence>
             </div>
 
-            <div className="h-10 w-[1px] bg-gray-100 mx-2 hidden md:block"></div>
+            <div className="h-10 w-[1px] bg-gray-100 dark:bg-gray-800 mx-2 hidden md:block"></div>
 
-            <div className="flex items-center gap-3 bg-[#F8FAFC] p-1.5 pr-4 rounded-2xl border border-[#7C3AED]/5">
+            <div className="flex items-center gap-3 bg-[#F8FAFC] dark:bg-[#1E293B] p-1.5 pr-4 rounded-2xl border border-[#7C3AED]/5 dark:border-[#7C3AED]/20">
               <img
                 src={userData.photoURL || `https://ui-avatars.com/api/?name=${encodeURIComponent(userData.name)}`}
                 alt={userData.name}
-                className="w-10 h-10 rounded-xl object-cover shadow-sm ring-2 ring-white"
+                className="w-10 h-10 rounded-xl object-cover shadow-sm ring-2 ring-white dark:ring-[#0F172A]"
               />
               <div className="hidden lg:block text-left">
-                <div className="text-sm font-black text-[#0F172A] leading-none mb-1">{userData.name.split(' ')[0]}</div>
+                <div className="text-sm font-black text-[#0F172A] dark:text-white leading-none mb-1">{userData.name.split(' ')[0]}</div>
                 <div className="text-[10px] text-[#7C3AED] font-black uppercase tracking-widest">{userData.role}</div>
               </div>
             </div>
 
             <button
               onClick={handleLogout}
-              className="p-3 text-[#64748B] hover:text-red-500 hover:bg-red-50 rounded-2xl transition-all"
+              className="p-3 text-[#64748B] dark:text-[#94A3B8] hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-900/10 rounded-2xl transition-all"
               title="Logout"
             >
               <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -232,13 +234,13 @@ const DashboardLayout = () => {
           {/* Mobile Overlay */}
           <div className={`fixed inset-0 bg-[#0F172A]/70 backdrop-blur-2xl md:hidden ${sidebarOpen ? 'block' : 'hidden'}`} onClick={() => setSidebarOpen(false)}></div>
 
-          <nav className="relative h-full bg-white md:bg-transparent rounded-[3rem] p-8 md:p-0 border border-gray-100 md:border-none shadow-3xl md:shadow-none overflow-y-auto">
+          <nav className="relative h-full bg-white dark:bg-[#1E293B] md:bg-transparent md:dark:bg-transparent rounded-[3rem] p-8 md:p-0 border border-gray-100 dark:border-gray-800 md:border-none shadow-3xl md:shadow-none overflow-y-auto">
             <div className="mb-10 md:hidden flex justify-between items-center">
               <Logo />
-              <button onClick={() => setSidebarOpen(false)} className="p-3 bg-[#F8FAFC] rounded-2xl text-[#64748B] hover:text-[#7C3AED] transition-colors">✕</button>
+              <button onClick={() => setSidebarOpen(false)} className="p-3 bg-[#F8FAFC] dark:bg-white/5 rounded-2xl text-[#64748B] dark:text-[#94A3B8] hover:text-[#7C3AED] transition-colors">✕</button>
             </div>
 
-            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#94A3B8] mb-8 px-5">Protocol Terminal</p>
+            <p className="text-[10px] font-black uppercase tracking-[0.3em] text-[#94A3B8] dark:text-[#64748B] mb-8 px-5">Protocol Terminal</p>
 
             <ul className="space-y-3">
               {getRoutes().map((route) => {
@@ -251,8 +253,8 @@ const DashboardLayout = () => {
                       className={`
                         flex items-center gap-5 px-6 py-5 rounded-[2rem] font-black text-sm transition-all group relative
                         ${isActive
-                          ? 'bg-[#7C3AED] text-white shadow-2xl shadow-purple-200'
-                          : 'text-[#64748B] hover:bg-white hover:text-[#7C3AED] border border-transparent hover:border-[#7C3AED]/10'
+                          ? 'bg-[#7C3AED] text-white shadow-2xl shadow-purple-200 dark:shadow-none'
+                          : 'text-[#64748B] dark:text-[#94A3B8] hover:bg-white dark:hover:bg-white/5 hover:text-[#7C3AED] border border-transparent hover:border-[#7C3AED]/10'
                         }
                       `}
                     >
@@ -265,7 +267,7 @@ const DashboardLayout = () => {
               })}
             </ul>
 
-            <div className="mt-16 pt-16 border-t border-gray-100 hidden md:block">
+            <div className="mt-16 pt-16 border-t border-gray-100 dark:border-gray-800 hidden md:block">
               <div className="bg-gradient-to-br from-[#7C3AED] via-[#6D28D9] to-[#4338CA] rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl shadow-purple-100 group">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-white/10 rounded-full -mr-10 -mt-10 group-hover:scale-150 transition-transform duration-700"></div>
                 <div className="relative z-10 text-center">
@@ -279,8 +281,8 @@ const DashboardLayout = () => {
         </aside>
 
         {/* Main Content Area */}
-        <main className="flex-1 bg-white rounded-[4rem] p-8 lg:p-16 border border-gray-100 shadow-sm min-h-[75vh] relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-[#F8FAFC] rounded-full blur-[100px] -mr-32 -mt-32"></div>
+        <main className="flex-1 bg-white dark:bg-[#1E293B] rounded-[4rem] p-8 lg:p-16 border border-gray-100 dark:border-gray-800 shadow-sm min-h-[75vh] relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-[#F8FAFC] dark:bg-[#334155]/20 rounded-full blur-[100px] -mr-32 -mt-32"></div>
           <AnimatePresence mode="wait">
             <motion.div
               key={location.pathname}

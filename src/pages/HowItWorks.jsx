@@ -35,8 +35,8 @@ const HowItWorks = () => {
                     animate={{ opacity: 1, y: 0 }}
                     className="text-center mb-20"
                 >
-                    <h1 className="text-4xl md:text-6xl font-black text-gray-900 mb-6">How <span className="text-indigo-600">SimpleEarn</span> Works</h1>
-                    <p className="text-xl text-gray-600 max-w-2xl mx-auto">Your step-by-step guide to starting your earning journey today.</p>
+                    <h1 className="text-4xl md:text-6xl font-black text-gray-900 dark:text-white mb-6">How <span className="text-indigo-600 dark:text-indigo-400">SimpleEarn</span> Works</h1>
+                    <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">Your step-by-step guide to starting your earning journey today.</p>
                 </motion.div>
 
                 <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-24">
@@ -47,11 +47,11 @@ const HowItWorks = () => {
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: idx * 0.1 }}
                             viewport={{ once: true }}
-                            className="bg-white p-8 rounded-[2.5rem] border border-gray-100 shadow-xl shadow-indigo-50/20 text-center group hover:bg-indigo-600 transition-all duration-500"
+                            className="bg-white dark:bg-[#1E293B] p-8 rounded-[2.5rem] border border-gray-100 dark:border-gray-800 shadow-xl shadow-indigo-50/20 dark:shadow-none text-center group hover:bg-indigo-600 dark:hover:bg-indigo-600 transition-all duration-500"
                         >
-                            <div className="mb-6 flex justify-center text-[#7C3AED] group-hover:text-white transition-colors duration-500">{step.icon}</div>
-                            <h3 className="text-2xl font-bold text-gray-900 group-hover:text-white mb-4">{step.title}</h3>
-                            <p className="text-gray-500 group-hover:text-indigo-100 leading-relaxed font-medium">{step.desc}</p>
+                            <div className="mb-6 flex justify-center text-[#7C3AED] dark:text-[#A78BFA] group-hover:text-white transition-colors duration-500">{step.icon}</div>
+                            <h3 className="text-2xl font-bold text-gray-900 dark:text-white group-hover:text-white mb-4">{step.title}</h3>
+                            <p className="text-gray-500 dark:text-slate-400 group-hover:text-indigo-100 leading-relaxed font-medium">{step.desc}</p>
                         </motion.div>
                     ))}
                 </div>
@@ -59,7 +59,7 @@ const HowItWorks = () => {
                 <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
                     whileInView={{ opacity: 1, scale: 1 }}
-                    className="bg-indigo-600 rounded-[3rem] p-12 text-center text-white shadow-2xl shadow-indigo-200 overflow-hidden relative"
+                    className="bg-indigo-600 rounded-[3rem] p-12 text-center text-white shadow-2xl shadow-indigo-200 dark:shadow-none overflow-hidden relative"
                 >
                     <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
                     <div className="relative z-10">

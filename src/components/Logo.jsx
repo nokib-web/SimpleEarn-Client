@@ -11,9 +11,9 @@ const Logo = ({ className = "" }) => {
                     </svg>
                 </div>
                 {/* Modern Status Accent (Teal) */}
-                <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#14B8A6] border-2 border-white rounded-full shadow-sm animate-pulse-soft"></div>
+                <div className="absolute -top-1 -right-1 w-4 h-4 bg-[#14B8A6] border-2 border-white dark:border-[#0F172A] rounded-full shadow-sm animate-pulse-soft"></div>
             </div>
-            <span className="text-[26px] font-black tracking-tighter text-[#0F172A] flex items-center">
+            <span className="text-[26px] font-black tracking-tighter text-[#0F172A] dark:text-white flex items-center">
                 Simple<span className="text-[#7C3AED]">Earn</span>
                 <span className="w-1.5 h-1.5 bg-[#F97316] rounded-full ml-1 self-end mb-1.5 animate-bounce"></span>
             </span>

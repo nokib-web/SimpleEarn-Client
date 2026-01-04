@@ -40,7 +40,7 @@ const Counter = ({ value, label, prefix = "" }) => {
 
   return (
     <div ref={ref} className="space-y-1">
-      <p className="text-3xl font-black text-white leading-none">
+      <p className="text-3xl font-black text-[#0F172A] dark:text-white leading-none">
         {prefix}{displayValue.toLocaleString()}{suffix}
       </p>
       <p className="text-[10px] font-black uppercase tracking-widest text-slate-500">{label}</p>
@@ -87,12 +87,12 @@ const Home = () => {
   ];
 
   return (
-    <div className="bg-[#FDFDFF] overflow-hidden">
+    <div className="bg-[#FDFDFF] dark:bg-[#0F172A] overflow-hidden transition-colors duration-300">
       {/* Professional Hero Section */}
-      <section className="relative min-h-[95vh] flex items-center pt-20 pb-32 overflow-hidden bg-[#0F172A]">
+      <section className="relative min-h-[95vh] flex items-center pt-20 pb-32 overflow-hidden bg-white dark:bg-[#0F172A] transition-colors duration-300">
         {/* Dynamic Background Elements */}
         <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20"></div>
+          <div className="absolute inset-0 bg-[linear-gradient(to_right,#e2e8f0_1px,transparent_1px),linear-gradient(to_bottom,#e2e8f0_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1e293b_1px,transparent_1px),linear-gradient(to_bottom,#1e293b_1px,transparent_1px)] bg-[size:40px_40px] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_0%,#000_70%,transparent_100%)] opacity-20"></div>
           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[600px] bg-gradient-to-b from-[#7C3AED]/20 to-transparent blur-[120px] rounded-full"></div>
           <div className="absolute -top-24 -left-24 w-96 h-96 bg-[#14B8A6]/10 rounded-full blur-[100px] animate-pulse-soft"></div>
         </div>
@@ -106,20 +106,20 @@ const Home = () => {
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.8 }}
               >
-                <div className="inline-flex items-center gap-3 px-4 py-2 bg-white/5 border border-white/10 rounded-full backdrop-blur-md mb-8">
+                <div className="inline-flex items-center gap-3 px-4 py-2 bg-slate-100 dark:bg-white/5 border border-slate-200 dark:border-white/10 rounded-full backdrop-blur-md mb-8">
                   <span className="flex h-2 w-2 relative">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#14B8A6] opacity-75"></span>
                     <span className="relative inline-flex rounded-full h-2 w-2 bg-[#14B8A6]"></span>
                   </span>
-                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-white/70">Protocol v2.4 Live: Global Settlement Enabled</span>
+                  <span className="text-[10px] font-black uppercase tracking-[0.2em] text-slate-600 dark:text-white/70">Protocol v2.4 Live: Global Settlement Enabled</span>
                 </div>
 
-                <h1 className="text-6xl md:text-8xl font-black text-white mb-8 leading-[0.95] tracking-tighter">
+                <h1 className="text-6xl md:text-8xl font-black text-[#0F172A] dark:text-white mb-8 leading-[0.95] tracking-tighter">
                   The Future of <br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#7C3AED] via-[#A78BFA] to-[#14B8A6]">Distributed Work</span>
                 </h1>
 
-                <p className="text-xl md:text-2xl text-slate-400 mb-12 max-w-2xl font-medium leading-relaxed">
+                <p className="text-xl md:text-2xl text-slate-600 dark:text-slate-400 mb-12 max-w-2xl font-medium leading-relaxed">
                   Join the world's most advanced micro-tasking protocol.
                   High-fidelity validation meets instant liquidity for a truly global workforce.
                 </p>
@@ -134,17 +134,17 @@ const Home = () => {
                   </Link>
                   <Link
                     to="/how-it-works"
-                    className="flex items-center justify-center gap-3 px-12 py-5 bg-white/5 text-white rounded-2xl font-black text-lg hover:bg-white/10 transition-all backdrop-blur-md border border-white/10"
+                    className="flex items-center justify-center gap-3 px-12 py-5 bg-slate-100 dark:bg-white/5 text-[#0F172A] dark:text-white rounded-2xl font-black text-lg hover:bg-slate-200 dark:hover:bg-white/10 transition-all backdrop-blur-md border border-slate-200 dark:border-white/10"
                   >
                     View Protocol Docs
                   </Link>
                 </div>
 
-                <div className="mt-16 flex items-center gap-12 border-t border-white/5 pt-12">
+                <div className="mt-16 flex items-center gap-12 border-t border-slate-200 dark:border-white/5 pt-12">
                   <Counter value="50000+" label="Active Nodes" />
-                  <div className="w-[1px] h-10 bg-white/5"></div>
+                  <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/5"></div>
                   <Counter value="1200000" label="Tasks Validated" />
-                  <div className="w-[1px] h-10 bg-white/5"></div>
+                  <div className="w-[1px] h-10 bg-slate-200 dark:bg-white/5"></div>
                   <Counter value="4800000+" label="Node Revenue" prefix="$" />
                 </div>
               </motion.div>
@@ -159,7 +159,7 @@ const Home = () => {
                 className="relative z-10"
               >
                 {/* Protocol Interface Mockup */}
-                <div className="bg-[#1E293B] rounded-[3rem] p-8 border border-white/10 shadow-2xl relative overflow-hidden group">
+                <div className="bg-white dark:bg-[#1E293B] rounded-[3rem] p-8 border border-slate-200 dark:border-white/10 shadow-2xl relative overflow-hidden group">
                   <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-[#7C3AED] to-transparent opacity-50"></div>
 
                   <div className="flex items-center justify-between mb-10">
@@ -168,22 +168,22 @@ const Home = () => {
                       <div className="w-3 h-3 rounded-full bg-amber-500/20"></div>
                       <div className="w-3 h-3 rounded-full bg-emerald-500/20"></div>
                     </div>
-                    <div className="px-3 py-1 bg-white/5 rounded-lg border border-white/5 text-[8px] font-black uppercase tracking-widest text-[#14B8A6]">
+                    <div className="px-3 py-1 bg-slate-100 dark:bg-white/5 rounded-lg border border-slate-200 dark:border-white/5 text-[8px] font-black uppercase tracking-widest text-[#14B8A6]">
                       Secure Session: Active
                     </div>
                   </div>
 
                   <div className="space-y-6">
-                    <div className="p-5 bg-white/5 rounded-2xl border border-white/5 flex items-center gap-4 group-hover:bg-white/10 transition-colors">
+                    <div className="p-5 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5 flex items-center gap-4 group-hover:bg-slate-100 dark:group-hover:bg-white/10 transition-colors">
                       <div className="w-12 h-12 bg-[#7C3AED]/20 rounded-xl flex items-center justify-center text-[#7C3AED]">
                         <HiOutlineBolt className="w-6 h-6" />
                       </div>
                       <div className="flex-grow">
                         <div className="flex justify-between mb-2">
-                          <span className="text-[10px] font-black uppercase text-slate-400">Task Acceleration</span>
+                          <span className="text-[10px] font-black uppercase text-slate-500 dark:text-slate-400">Task Acceleration</span>
                           <span className="text-[10px] font-black text-[#7C3AED]">98.4%</span>
                         </div>
-                        <div className="w-full bg-white/5 h-1.5 rounded-full overflow-hidden">
+                        <div className="w-full bg-slate-200 dark:bg-white/5 h-1.5 rounded-full overflow-hidden">
                           <motion.div
                             initial={{ width: 0 }}
                             animate={{ width: '98.4%' }}
@@ -194,25 +194,25 @@ const Home = () => {
                       </div>
                     </div>
 
-                    <div className="p-5 bg-white/5 rounded-2xl border border-white/5 flex items-center gap-4">
+                    <div className="p-5 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5 flex items-center gap-4">
                       <div className="w-12 h-12 bg-[#14B8A6]/20 rounded-xl flex items-center justify-center text-[#14B8A6]">
                         <HiOutlineBanknotes className="w-6 h-6" />
                       </div>
                       <div>
-                        <p className="text-[10px] font-black uppercase text-slate-400 mb-1">Total Distributed</p>
-                        <p className="text-2xl font-black text-white">412,890.00 <span className="text-xs text-slate-500">Coins</span></p>
+                        <p className="text-[10px] font-black uppercase text-slate-500 dark:text-slate-400 mb-1">Total Distributed</p>
+                        <p className="text-2xl font-black text-[#0F172A] dark:text-white">412,890.00 <span className="text-xs text-slate-500">Coins</span></p>
                       </div>
                     </div>
 
                     <div className="grid grid-cols-2 gap-4">
-                      <div className="p-4 bg-white/5 rounded-2xl border border-white/5">
+                      <div className="p-4 bg-slate-50 dark:bg-white/5 rounded-2xl border border-slate-100 dark:border-white/5">
                         <HiOutlineUserGroup className="w-5 h-5 text-slate-500 mb-3" />
-                        <p className="text-sm font-black text-white">12,402</p>
+                        <p className="text-sm font-black text-[#0F172A] dark:text-white">12,402</p>
                         <p className="text-[8px] font-black uppercase text-slate-500">Verified Workers</p>
                       </div>
                       <div className="p-4 bg-[#7C3AED]/10 rounded-2xl border border-[#7C3AED]/20">
                         <HiOutlineGlobeAlt className="w-5 h-5 text-[#7C3AED] mb-3" />
-                        <p className="text-sm font-black text-white">142</p>
+                        <p className="text-sm font-black text-[#0F172A] dark:text-white">142</p>
                         <p className="text-[8px] font-black uppercase text-[#7C3AED]">Global Regions</p>
                       </div>
                     </div>
@@ -231,14 +231,14 @@ const Home = () => {
                 <motion.div
                   animate={{ y: [0, -15, 0] }}
                   transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-                  className="absolute -top-12 -right-12 p-6 glass-card !bg-[#0F172A]/80 rounded-3xl border border-white/10 shadow-3xl z-20"
+                  className="absolute -top-12 -right-12 p-6 glass-card !bg-white/80 dark:!bg-[#0F172A]/80 rounded-3xl border border-slate-200 dark:border-white/10 shadow-3xl z-20"
                 >
                   <div className="flex items-center gap-4">
                     <div className="w-10 h-10 bg-[#14B8A6] rounded-xl flex items-center justify-center text-white">
                       <HiOutlineShieldCheck className="w-6 h-6" />
                     </div>
                     <div>
-                      <p className="text-xs font-black text-white">Verified Peer</p>
+                      <p className="text-xs font-black text-[#0F172A] dark:text-white">Verified Peer</p>
                       <p className="text-[8px] font-black text-[#14B8A6] uppercase tracking-widest">Protocol Secured</p>
                     </div>
                   </div>
@@ -266,10 +266,10 @@ const Home = () => {
       </section>
 
       {/* Trusted By Section */}
-      <section className="py-20 border-b border-gray-100 bg-[#F8FAFC]">
+      <section className="py-20 border-b border-gray-100 dark:border-gray-800 bg-[#F8FAFC] dark:bg-[#1E293B]">
         <Container>
-          <p className="text-xs font-black text-[#64748B] uppercase tracking-[0.3em] mb-12 text-center opacity-70">Empowering projects for global leaders</p>
-          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000">
+          <p className="text-xs font-black text-[#64748B] dark:text-[#94A3B8] uppercase tracking-[0.3em] mb-12 text-center opacity-70">Empowering projects for global leaders</p>
+          <div className="flex flex-wrap justify-center items-center gap-12 md:gap-24 grayscale opacity-40 hover:grayscale-0 hover:opacity-100 transition-all duration-1000 dark:invert">
             <img src="https://upload.wikimedia.org/wikipedia/commons/2/2f/Google_2015_logo.svg" alt="Google" className="h-6 md:h-7" />
             <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg" alt="Microsoft" className="h-6 md:h-7" />
             <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" className="h-6 md:h-7" />
@@ -280,7 +280,7 @@ const Home = () => {
       </section>
 
       {/* Best Workers Section */}
-      <section className="py-32 bg-white relative">
+      <section className="py-32 bg-white dark:bg-[#0F172A] relative">
         <Container>
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -289,13 +289,13 @@ const Home = () => {
             className="text-center mb-24"
           >
             <span className="text-[#14B8A6] font-black uppercase tracking-widest text-sm mb-4 block">Platform Excellence</span>
-            <h2 className="text-5xl md:text-7xl font-black text-[#0F172A] mb-6 tracking-tighter">Elite <span className="text-[#7C3AED]">Earners</span> Gallery</h2>
-            <p className="text-xl text-[#64748B] max-w-2xl mx-auto font-medium">Celebrating the masters of the micro-tasking ecosystem.</p>
+            <h2 className="text-5xl md:text-7xl font-black text-[#0F172A] dark:text-white mb-6 tracking-tighter">Elite <span className="text-[#7C3AED]">Earners</span> Gallery</h2>
+            <p className="text-xl text-[#64748B] dark:text-[#94A3B8] max-w-2xl mx-auto font-medium">Celebrating the masters of the micro-tasking ecosystem.</p>
           </motion.div>
 
           {loading ? (
             <div className="flex justify-center py-20">
-              <div className="w-14 h-14 border-4 border-purple-100 border-t-[#7C3AED] rounded-full animate-spin"></div>
+              <div className="w-14 h-14 border-4 border-purple-100 dark:border-purple-900 border-t-[#7C3AED] rounded-full animate-spin"></div>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
@@ -306,7 +306,7 @@ const Home = () => {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: index * 0.1, duration: 0.5 }}
-                  className="group relative bg-[#F8FAFC] rounded-[3rem] p-10 hover:bg-white hover:shadow-2xl hover:shadow-purple-100 transition-all duration-700 border border-transparent hover:border-purple-50"
+                  className="group relative bg-[#F8FAFC] dark:bg-[#1E293B] rounded-[3rem] p-10 hover:bg-white dark:hover:bg-[#1E293B] hover:shadow-2xl hover:shadow-purple-100 dark:hover:shadow-none transition-all duration-700 border border-transparent hover:border-purple-50 dark:border-gray-800 dark:hover:border-purple-500/20"
                 >
                   <div className="relative mb-8 mx-auto w-36 h-36">
                     <div className="absolute inset-0 bg-[#7C3AED] rounded-[2.5rem] rotate-6 group-hover:rotate-12 transition-transform duration-701 opacity-5"></div>
@@ -321,9 +321,9 @@ const Home = () => {
                       </svg>
                     </div>
                   </div>
-                  <h3 className="text-2xl font-black text-[#0F172A] mb-1 group-hover:text-[#7C3AED] transition-colors tracking-tight">{worker.name}</h3>
-                  <p className="text-[#64748B] font-bold text-xs uppercase tracking-widest mb-8">Verified Expert</p>
-                  <div className="inline-flex items-center gap-2 px-8 py-3 bg-white rounded-2xl border border-purple-50 group-hover:border-[#7C3AED]/20 transition-all shadow-sm">
+                  <h3 className="text-2xl font-black text-[#0F172A] dark:text-white mb-1 group-hover:text-[#7C3AED] transition-colors tracking-tight">{worker.name}</h3>
+                  <p className="text-[#64748B] dark:text-[#94A3B8] font-bold text-xs uppercase tracking-widest mb-8">Verified Expert</p>
+                  <div className="inline-flex items-center gap-2 px-8 py-3 bg-white dark:bg-[#0F172A] rounded-2xl border border-purple-50 dark:border-purple-900/30 group-hover:border-[#7C3AED]/20 transition-all shadow-sm">
                     <span className="text-[#7C3AED] font-black text-2xl tracking-tighter">{worker.coin.toLocaleString()}</span>
                     <span className="text-[#64748B] text-[10px] font-black uppercase tracking-wider">Coins</span>
                   </div>
@@ -335,7 +335,7 @@ const Home = () => {
       </section>
 
       {/* Why Choose Section */}
-      <section className="py-32 bg-[#0F172A] text-white overflow-hidden relative">
+      <section className="py-32 bg-white dark:bg-[#0F172A] text-[#0F172A] dark:text-white overflow-hidden relative transition-colors duration-300">
         <div className="absolute top-0 right-0 p-60 bg-[#7C3AED] rounded-full blur-[200px] opacity-10 -mr-40 -mt-40 animate-pulse-soft"></div>
         <Container>
           <div className="grid lg:grid-cols-2 gap-24 items-center">
@@ -360,10 +360,10 @@ const Home = () => {
                     transition={{ delay: idx * 0.1, duration: 0.6 }}
                     key={idx} className="flex gap-8 group"
                   >
-                    <div className="w-16 h-16 bg-white/5 rounded-[1.5rem] flex items-center justify-center text-3xl flex-shrink-0 border border-white/10 group-hover:bg-[#7C3AED] transition-all duration-500 transform group-hover:-rotate-6">{item.i}</div>
+                    <div className="w-16 h-16 bg-slate-100 dark:bg-white/5 rounded-[1.5rem] flex items-center justify-center text-3xl flex-shrink-0 border border-slate-200 dark:border-white/10 group-hover:bg-[#7C3AED] transition-all duration-500 transform group-hover:-rotate-6">{item.i}</div>
                     <div>
                       <h4 className="text-2xl font-black mb-2 tracking-tight">{item.t}</h4>
-                      <p className="text-[#94A3B8] leading-relaxed font-medium text-lg">{item.d}</p>
+                      <p className="text-slate-600 dark:text-[#94A3B8] leading-relaxed font-medium text-lg">{item.d}</p>
                     </div>
                   </motion.div>
                 ))}
@@ -376,7 +376,7 @@ const Home = () => {
                 transition={{ duration: 1 }}
                 className="bg-gradient-to-br from-[#7C3AED] to-[#14B8A6] rounded-[4rem] p-1 shadow-[0_0_80px_rgba(124,102,237,0.2)]"
               >
-                <div className="bg-[#0F172A] rounded-[3.9rem] p-10 md:p-16 overflow-hidden relative">
+                <div className="bg-white dark:bg-[#0F172A] rounded-[3.9rem] p-10 md:p-16 overflow-hidden relative">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#14B8A6] blur-[100px] opacity-10"></div>
                   <div className="flex justify-between items-center mb-16">
                     <div className="text-4xl font-black tracking-tighter">Velocity</div>
@@ -384,7 +384,7 @@ const Home = () => {
                   </div>
                   <div className="space-y-8">
                     {[90, 65, 100, 75, 95].map((h, i) => (
-                      <div key={i} className="w-full bg-white/5 rounded-2xl h-10 overflow-hidden relative border border-white/5">
+                      <div key={i} className="w-full bg-slate-100 dark:bg-white/5 rounded-2xl h-10 overflow-hidden relative border border-slate-200 dark:border-white/5">
                         <motion.div
                           initial={{ width: 0 }}
                           whileInView={{ width: `${h}%` }}
@@ -402,12 +402,12 @@ const Home = () => {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-32 bg-white">
+      <section className="py-32 bg-white dark:bg-[#0F172A]">
         <Container className="max-w-4xl">
           <div className="text-center mb-24">
             <span className="text-[#F97316] font-black uppercase tracking-widest text-sm mb-4 block">Support Center</span>
-            <h2 className="text-5xl md:text-7xl font-black text-[#0F172A] mb-6 tracking-tighter">Insights & <span className="text-[#14B8A6]">Answers</span></h2>
-            <p className="text-xl text-[#64748B] font-medium">Technical documentation for the global earner.</p>
+            <h2 className="text-5xl md:text-7xl font-black text-[#0F172A] dark:text-white mb-6 tracking-tighter">Insights & <span className="text-[#14B8A6]">Answers</span></h2>
+            <p className="text-xl text-[#64748B] dark:text-[#94A3B8] font-medium">Technical documentation for the global earner.</p>
           </div>
 
           <div className="space-y-6">
@@ -417,14 +417,14 @@ const Home = () => {
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: idx * 0.05 }}
-                className="bg-[#F8FAFC] rounded-[2.5rem] border border-gray-100 overflow-hidden transition-all hover:shadow-xl hover:shadow-purple-50 group"
+                className="bg-[#F8FAFC] dark:bg-[#1E293B] rounded-[2.5rem] border border-gray-100 dark:border-gray-800 overflow-hidden transition-all hover:shadow-xl hover:shadow-purple-50 dark:hover:shadow-none group"
               >
                 <button
                   onClick={() => setActiveFaq(activeFaq === idx ? null : idx)}
                   className="w-full flex items-center justify-between p-8 text-left transition-all"
                 >
-                  <span className="text-xl font-black text-[#0F172A] group-hover:text-[#7C3AED] transition-colors tracking-tight">{faq.q}</span>
-                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-500 ${activeFaq === idx ? 'bg-[#7C3AED] text-white rotate-180' : 'bg-white text-[#7C3AED] border border-purple-50'}`}>
+                  <span className="text-xl font-black text-[#0F172A] dark:text-slate-200 group-hover:text-[#7C3AED] transition-colors tracking-tight">{faq.q}</span>
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center transition-all duration-500 ${activeFaq === idx ? 'bg-[#7C3AED] text-white rotate-180' : 'bg-white dark:bg-[#0F172A] text-[#7C3AED] border border-purple-50 dark:border-purple-900/30'}`}>
                     <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M19 9l-7 7-7-7" />
                     </svg>
@@ -439,7 +439,7 @@ const Home = () => {
                       transition={{ duration: 0.4, ease: "circOut" }}
                       className="px-8 pb-8"
                     >
-                      <p className="text-[#64748B] text-lg leading-relaxed pt-4 border-t border-gray-200/40 font-medium">{faq.a}</p>
+                      <p className="text-[#64748B] dark:text-[#94A3B8] text-lg leading-relaxed pt-4 border-t border-gray-200/40 dark:border-gray-700/40 font-medium">{faq.a}</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
@@ -477,19 +477,19 @@ const Home = () => {
       </section>
 
       {/* Final CTA Footer */}
-      <section className="py-32 bg-white">
+      <section className="py-32 bg-white dark:bg-[#0F172A]">
         <Container>
-          <div className="bg-[#F8FAFC] rounded-[5rem] py-28 px-10 text-center relative overflow-hidden border border-purple-50 group">
+          <div className="bg-[#F8FAFC] dark:bg-[#1E293B] rounded-[5rem] py-28 px-10 text-center relative overflow-hidden border border-purple-50 dark:border-purple-900/20 group">
             <div className="absolute top-0 left-0 -ml-24 -mt-24 w-96 h-96 bg-[#7C3AED]/5 rounded-full blur-[120px] group-hover:bg-[#7C3AED]/10 transition-colors duration-1000"></div>
             <div className="relative z-10">
               <span className="text-[#F97316] font-black uppercase tracking-[0.4em] text-xs mb-8 block">Next Generation Micro-Tasking</span>
-              <h2 className="text-6xl md:text-8xl font-black text-[#0F172A] mb-10 tracking-tighter leading-tight">Ready to <span className="text-[#7C3AED]">Protocol?</span></h2>
-              <p className="text-2xl text-[#64748B] mb-16 max-w-3xl mx-auto font-medium leading-relaxed">Join the most advanced earning network. Low latency. High security. Instant liquidity.</p>
+              <h2 className="text-6xl md:text-8xl font-black text-[#0F172A] dark:text-white mb-10 tracking-tighter leading-tight">Ready to <span className="text-[#7C3AED]">Protocol?</span></h2>
+              <p className="text-2xl text-[#64748B] dark:text-[#94A3B8] mb-16 max-w-3xl mx-auto font-medium leading-relaxed">Join the most advanced earning network. Low latency. High security. Instant liquidity.</p>
               <div className="flex flex-col sm:flex-row gap-6 justify-center">
                 <Link to="/register" className="btn-primary text-xl px-16 py-6 shadow-2xl shadow-purple-500/30">
                   Create Your Node
                 </Link>
-                <Link to="/contact" className="px-16 py-6 bg-white text-[#0F172A] rounded-2xl font-black text-xl hover:bg-[#F8FAFC] transition-all border border-gray-200 hover:border-[#7C3AED]/20 hover:shadow-lg">
+                <Link to="/contact" className="px-16 py-6 bg-white dark:bg-[#0F172A] text-[#0F172A] dark:text-white rounded-2xl font-black text-xl hover:bg-[#F8FAFC] dark:hover:bg-[#1E293B] transition-all border border-gray-200 dark:border-gray-800 hover:border-[#7C3AED]/20 hover:shadow-lg">
                   Talk to Protocol
                 </Link>
               </div>

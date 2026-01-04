@@ -48,10 +48,10 @@ const Register = () => {
   };
 
   return (
-    <div className="py-12 md:py-20 bg-[#FDFDFF] min-h-[calc(100vh-80px)] flex items-center">
+    <div className="py-12 md:py-20 bg-[#FDFDFF] dark:bg-[#0F172A] min-h-[calc(100vh-80px)] flex items-center transition-colors duration-300">
       <Container>
         <div className="max-w-5xl mx-auto">
-          <div className="bg-white rounded-[4rem] shadow-2xl shadow-purple-100 border border-gray-100 overflow-hidden flex flex-col lg:flex-row">
+          <div className="bg-white dark:bg-[#1E293B] rounded-[4rem] shadow-2xl shadow-purple-100 dark:shadow-none border border-gray-100 dark:border-gray-800 overflow-hidden flex flex-col lg:flex-row">
 
             {/* Left Side: Brand Visual */}
             <div className="lg:w-5/12 bg-[#0F172A] p-12 text-white relative overflow-hidden flex flex-col justify-between">
@@ -104,8 +104,8 @@ const Register = () => {
             {/* Right Side: Form */}
             <div className="lg:w-7/12 p-12 md:p-16">
               <div className="mb-12">
-                <h2 className="text-3xl font-black text-[#0F172A] tracking-tighter mb-2">Initialize Account</h2>
-                <p className="text-[#64748B] font-medium">Configure your network identity to start earning.</p>
+                <h2 className="text-3xl font-black text-[#0F172A] dark:text-white tracking-tighter mb-2">Initialize Account</h2>
+                <p className="text-[#64748B] dark:text-[#94A3B8] font-medium">Configure your network identity to start earning.</p>
               </div>
 
               {error && (
@@ -122,22 +122,22 @@ const Register = () => {
               <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] ml-2">Display Name</label>
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] dark:text-[#94A3B8] ml-2">Display Name</label>
                     <div className="relative group">
-                      <HiOutlineUser className="absolute left-6 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED] text-[#94A3B8]" />
+                      <HiOutlineUser className="absolute left-6 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED] text-[#94A3B8] dark:text-[#64748B]" />
                       <input
                         type="text"
                         {...register('name', { required: 'Name is required' })}
-                        className="w-full pl-14 pr-6 py-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl focus:bg-white focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A]"
+                        className="w-full pl-14 pr-6 py-4 bg-[#F8FAFC] dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-gray-700/50 rounded-2xl focus:bg-white dark:focus:bg-[#1E293B] focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600"
                         placeholder="John Doe"
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] ml-2">Protocol Role</label>
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] dark:text-[#94A3B8] ml-2">Protocol Role</label>
                     <select
                       {...register('role', { required: 'Role is required' })}
-                      className="w-full px-6 py-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl focus:bg-white focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-black text-[#0F172A] appearance-none"
+                      className="w-full px-6 py-4 bg-[#F8FAFC] dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-gray-700/50 rounded-2xl focus:bg-white dark:focus:bg-[#1E293B] focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-black text-[#0F172A] dark:text-white appearance-none"
                     >
                       <option value="worker">Worker Node</option>
                       <option value="buyer">Task Buyer</option>
@@ -146,27 +146,27 @@ const Register = () => {
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] ml-2">Email Identity</label>
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] dark:text-[#94A3B8] ml-2">Email Identity</label>
                   <div className="relative group">
-                    <HiOutlineEnvelope className="absolute left-6 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED] text-[#94A3B8]" />
+                    <HiOutlineEnvelope className="absolute left-6 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED] text-[#94A3B8] dark:text-[#64748B]" />
                     <input
                       type="email"
                       {...register('email', { required: 'Email is required' })}
-                      className="w-full pl-14 pr-6 py-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl focus:bg-white focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A]"
+                      className="w-full pl-14 pr-6 py-4 bg-[#F8FAFC] dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-gray-700/50 rounded-2xl focus:bg-white dark:focus:bg-[#1E293B] focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600"
                       placeholder="john@protocol.io"
                     />
                   </div>
                 </div>
 
                 <div className="space-y-2">
-                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] ml-2">Avatar Profile</label>
-                  <label className="flex items-center gap-4 p-4 bg-[#F8FAFC] border-2 border-dashed border-[#E2E8F0] rounded-2xl cursor-pointer hover:bg-[#F1F5F9] transition-all group">
-                    <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center text-[#94A3B8] shadow-sm group-hover:text-[#7C3AED] transition-colors overflow-hidden">
+                  <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] dark:text-[#94A3B8] ml-2">Avatar Profile</label>
+                  <label className="flex items-center gap-4 p-4 bg-[#F8FAFC] dark:bg-[#0F172A] border-2 border-dashed border-[#E2E8F0] dark:border-gray-700 rounded-2xl cursor-pointer hover:bg-[#F1F5F9] dark:hover:bg-[#1E293B] transition-all group">
+                    <div className="w-12 h-12 bg-white dark:bg-[#1E293B] rounded-xl flex items-center justify-center text-[#94A3B8] dark:text-[#64748B] shadow-sm group-hover:text-[#7C3AED] transition-colors overflow-hidden">
                       {previewImage ? <img src={previewImage} className="w-full h-full object-cover" /> : <HiOutlinePhoto className="w-6 h-6" />}
                     </div>
                     <div className="text-left">
-                      <p className="text-xs font-black text-[#64748B]">Choose system avatar...</p>
-                      <p className="text-[10px] text-[#94A3B8] font-medium">SVG, PNG, JPG (max 2MB)</p>
+                      <p className="text-xs font-black text-[#64748B] dark:text-[#94A3B8]">Choose system avatar...</p>
+                      <p className="text-[10px] text-[#94A3B8] dark:text-[#64748B] font-medium">SVG, PNG, JPG (max 2MB)</p>
                     </div>
                     <input type="file" className="hidden" accept="image/*" {...register('photo')} onChange={handleImageChange} />
                   </label>
@@ -174,22 +174,22 @@ const Register = () => {
 
                 <div className="grid md:grid-cols-2 gap-6">
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] ml-2">Security Key</label>
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] dark:text-[#94A3B8] ml-2">Security Key</label>
                     <div className="relative group">
-                      <HiOutlineLockClosed className="absolute left-6 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED] text-[#94A3B8]" />
+                      <HiOutlineLockClosed className="absolute left-6 top-1/2 -translate-y-1/2 transition-colors group-focus-within:text-[#7C3AED] text-[#94A3B8] dark:text-[#64748B]" />
                       <input
                         type="password"
                         {...register('password', { required: 'Password is required' })}
-                        className="w-full pl-14 pr-6 py-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl focus:bg-white focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A]"
+                        className="w-full pl-14 pr-6 py-4 bg-[#F8FAFC] dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-gray-700/50 rounded-2xl focus:bg-white dark:focus:bg-[#1E293B] focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600"
                         placeholder="••••••••"
                       />
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] ml-2">Verify Key</label>
+                    <label className="text-[10px] font-black uppercase tracking-[0.2em] text-[#64748B] dark:text-[#94A3B8] ml-2">Verify Key</label>
                     <input
                       type="password"
-                      className="w-full px-6 py-4 bg-[#F8FAFC] border border-[#E2E8F0] rounded-2xl focus:bg-white focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A]"
+                      className="w-full px-6 py-4 bg-[#F8FAFC] dark:bg-[#0F172A] border border-[#E2E8F0] dark:border-gray-700/50 rounded-2xl focus:bg-white dark:focus:bg-[#1E293B] focus:border-[#7C3AED] focus:ring-4 focus:ring-[#7C3AED]/5 outline-none transition-all font-bold text-[#0F172A] dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600"
                       placeholder="••••••••"
                     />
                   </div>
@@ -212,7 +212,7 @@ const Register = () => {
                   </button>
                 </div>
 
-                <p className="text-center text-xs font-bold text-[#64748B]">
+                <p className="text-center text-xs font-bold text-[#64748B] dark:text-[#94A3B8]">
                   Previously registered? <Link to="/login" className="text-[#7C3AED] hover:underline underline-offset-4">Access Terminal</Link>
                 </p>
               </form>
