@@ -3,7 +3,7 @@ import { useAuth } from '../contexts/AuthContext';
 import { useState, useEffect } from 'react';
 import Logo from './Logo';
 import { motion, AnimatePresence } from 'framer-motion';
-import { HiOutlineHome, HiOutlineSparkles, HiOutlineLightBulb, HiOutlineEnvelope, HiOutlineBell } from 'react-icons/hi2';
+import { HiOutlineHome, HiOutlineSparkles, HiOutlineLightBulb, HiOutlineEnvelope, HiOutlineBell, HiOutlineNewspaper } from 'react-icons/hi2';
 
 const Navbar = () => {
     const { userData, logout } = useAuth();
@@ -27,6 +27,7 @@ const Navbar = () => {
 
     const navLinks = [
         { name: 'Home', path: '/', icon: <HiOutlineHome className="w-5 h-5" /> },
+        { name: 'Blog', path: '/blog', icon: <HiOutlineNewspaper className="w-5 h-5" /> },
         { name: 'About', path: '/about', icon: <HiOutlineSparkles className="w-5 h-5" /> },
         { name: 'How It Works', path: '/how-it-works', icon: <HiOutlineLightBulb className="w-5 h-5" /> },
         { name: 'Contact', path: '/contact', icon: <HiOutlineEnvelope className="w-5 h-5" /> },

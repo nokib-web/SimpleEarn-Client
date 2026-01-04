@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../../utils/api';
 import { motion } from 'framer-motion';
-import { HiOutlineDocumentCheck, HiOutlineClock, HiOutlineCurrencyDollar, HiOutlineChartBar } from 'react-icons/hi2';
+import { HiOutlineClipboardDocumentCheck, HiOutlineClock, HiOutlineCurrencyDollar, HiOutlineChartBar } from 'react-icons/hi2';
 
 const WorkerHome = () => {
   const [stats, setStats] = useState({
@@ -54,7 +54,7 @@ const WorkerHome = () => {
       {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
         {[
-          { label: 'Total Submissions', value: stats.totalSubmissions, icon: HiOutlineDocumentCheck, color: 'text-[#7C3AED]', bg: 'bg-[#7C3AED]/5' },
+          { label: 'Total Submissions', value: stats.totalSubmissions, icon: HiOutlineClipboardDocumentCheck, color: 'text-[#7C3AED]', bg: 'bg-[#7C3AED]/5' },
           { label: 'Pending Review', value: stats.pendingSubmissions, icon: HiOutlineClock, color: 'text-[#F97316]', bg: 'bg-[#F97316]/5' },
           { label: 'Total Earnings', value: `${stats.totalEarning} Coins`, icon: HiOutlineCurrencyDollar, color: 'text-[#14B8A6]', bg: 'bg-[#14B8A6]/5' }
         ].map((item, idx) => (

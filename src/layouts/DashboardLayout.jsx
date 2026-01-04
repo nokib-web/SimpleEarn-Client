@@ -17,7 +17,8 @@ import {
   HiOutlineChartBar,
   HiOutlineUsers,
   HiOutlinePencilSquare,
-  HiOutlineCurrencyDollar
+  HiOutlineCurrencyDollar,
+  HiOutlineNewspaper
 } from 'react-icons/hi2';
 
 const DashboardLayout = () => {
@@ -49,6 +50,7 @@ const DashboardLayout = () => {
     { path: '/dashboard/admin-home', label: 'Home', icon: <HiOutlineHome /> },
     { path: '/dashboard/manage-users', label: 'Manage Users', icon: <HiOutlineUsers /> },
     { path: '/dashboard/manage-tasks', label: 'Manage Tasks', icon: <HiOutlinePencilSquare /> },
+    { path: '/dashboard/manage-blogs', label: 'Manage Blogs', icon: <HiOutlineNewspaper /> },
     { path: '/dashboard/withdraw-requests', label: 'Withdraw Request', icon: <HiOutlineCurrencyDollar /> }
   ];
 

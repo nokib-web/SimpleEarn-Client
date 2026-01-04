@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import api from '../../utils/api';
 import { motion } from 'framer-motion';
-import { HiOutlineClipboardList, HiOutlineUserGroup, HiOutlineCreditCard, HiOutlineEllipsisHorizontal } from 'react-icons/hi2';
+import { HiOutlineClipboardDocumentList, HiOutlineUserGroup, HiOutlineCreditCard, HiOutlineEllipsisHorizontal } from 'react-icons/hi2';
 
 const BuyerHome = () => {
   const [stats, setStats] = useState({
@@ -59,10 +59,9 @@ const BuyerHome = () => {
         </div>
       </div>
 
-      {/* Stats Cards */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {[
-          { label: 'Active Tasks', value: stats.totalTasks, icon: HiOutlineClipboardList, color: 'text-[#7C3AED]', bg: 'bg-[#7C3AED]/5' },
+          { label: 'Active Tasks', value: stats.totalTasks, icon: HiOutlineClipboardDocumentList, color: 'text-[#7C3AED]', bg: 'bg-[#7C3AED]/5' },
           { label: 'Total Workforce', value: stats.pendingTasks, icon: HiOutlineUserGroup, color: 'text-[#F97316]', bg: 'bg-[#F97316]/5' },
           { label: 'Network Spend', value: `${stats.totalPayment} Coins`, icon: HiOutlineCreditCard, color: 'text-[#14B8A6]', bg: 'bg-[#14B8A6]/5' }
         ].map((item, idx) => (

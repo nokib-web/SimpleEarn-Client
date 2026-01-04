@@ -8,6 +8,8 @@ import Register from './pages/Register';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import HowItWorks from './pages/HowItWorks';
+import BlogList from './pages/BlogList';
+import BlogDetails from './pages/BlogDetails';
 import PrivateRoute from './components/PrivateRoute';
 import WorkerHome from './pages/dashboard/WorkerHome';
 import BuyerHome from './pages/dashboard/BuyerHome';
@@ -24,6 +26,7 @@ import PaymentHistory from './pages/dashboard/PaymentHistory';
 import WithdrawRequests from './pages/dashboard/WithdrawRequests';
 import ManageUsers from './pages/dashboard/ManageUsers';
 import ManageTasks from './pages/dashboard/ManageTasks';
+import ManageBlogs from './pages/dashboard/ManageBlogs';
 
 function App() {
     return (
@@ -37,6 +40,8 @@ function App() {
                         <Route path="about" element={<About />} />
                         <Route path="contact" element={<Contact />} />
                         <Route path="how-it-works" element={<HowItWorks />} />
+                        <Route path="blog" element={<BlogList />} />
+                        <Route path="blog/:id" element={<BlogDetails />} />
                     </Route>
 
                     <Route
@@ -62,6 +67,7 @@ function App() {
                         <Route path="withdraw-requests" element={<PrivateRoute allowedRoles={['admin']}><WithdrawRequests /></PrivateRoute>} />
                         <Route path="manage-users" element={<PrivateRoute allowedRoles={['admin']}><ManageUsers /></PrivateRoute>} />
                         <Route path="manage-tasks" element={<PrivateRoute allowedRoles={['admin']}><ManageTasks /></PrivateRoute>} />
+                        <Route path="manage-blogs" element={<PrivateRoute allowedRoles={['admin']}><ManageBlogs /></PrivateRoute>} />
                     </Route>
                 </Routes>
             </Router>
